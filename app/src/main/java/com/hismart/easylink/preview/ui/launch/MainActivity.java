@@ -1,20 +1,14 @@
 package com.hismart.easylink.preview.ui.launch;
 
-import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTabHost;
 import android.support.v7.app.AppCompatActivity;
-import android.util.SparseArray;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.TabHost;
 
 import com.hismart.easylink.preview.R;
-
-import java.util.HashMap;
 
 /**
  * @author qinwendong.
@@ -23,20 +17,12 @@ import java.util.HashMap;
  */
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private FragmentTabHost mTabHost = null;
-    //SparseArray核心是折半查找
-    private static final HashMap sTabFragmentMap = new HashMap();
-    private static final SparseArray sIndexTabMap = new SparseArray();
-
-    private static void addIndexTabFragment(int index, int tabResId, int layoutId) {
-
-    }
-
-    static {
-        addIndexTabFragment(0, R.id.tab_homepage, R.layout.fragment_main_homepage);
-        addIndexTabFragment(1, R.id.tab_intelligence, R.layout.fragment_main_intelligence);
-        addIndexTabFragment(2, R.id.tab_mall, R.layout.fragment_main_mall);
-        addIndexTabFragment(3, R.id.tab_mine, R.layout.fragment_main_mine);
-    }
+    /**
+     * 声明全局tab list数组，减少重复代码
+     */
+    private static final Integer[] TAB_IDS = {R.id.tab_homepage, R.id.tab_intelligence, R.id.tab_mall, R.id.tab_mine};
+    View[] mUnderTabs = new View[4];
+    View[] mOnTabs =  new View[4];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,25 +37,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 android.R.id.tabcontent);
         LayoutInflater inflate = LayoutInflater.from(this);
 
-        View tab0 = inflate.inflate(R.layout.item_homepage_tab_invisible, null);
-        View tab1 = inflate.inflate(R.layout.item_homepage_tab_invisible, null);
-        View tab2 = inflate.inflate(R.layout.item_homepage_tab_invisible, null);
-        View tab3 = inflate.inflate(R.layout.item_homepage_tab_invisible, null);
 
-        tab0.setEnabled(false);
-        tab1.setEnabled(true);
-        tab2.setEnabled(true);
-        tab3.setEnabled(true);
-
-        mTabHost.addTab(mTabHost.newTabSpec("tab0").setIndicator(tab0),
-                HomepageFragment.class, null);
-        mTabHost.addTab(mTabHost.newTabSpec("tab1").setIndicator(tab1),
-                HomepageFragment.class, null);
-        mTabHost.addTab(mTabHost.newTabSpec("tab2").setIndicator(tab2),
-                HomepageFragment.class, null);
-        mTabHost.addTab(mTabHost.newTabSpec("tab3").setIndicator(tab3),
-                HomepageFragment.class, null);
-
+        Class<?>[] fragments = new Class[]{HomepageFragment.class, IntelligenceFragment.class, HomepageFragment.class, HomepageFragment.class};
+        for (int i = 0; i < fragments.length; i++) {
+            mUnderTabs[i] = inflate.inflate(R.layout.item_homepage_cover_tabs, null);
+            mOnTabs[i] = findViewById(TAB_IDS[i]);
+            mTabHost.addTab(mTabHost.newTabSpec("tab" + i).setIndicator(mUnderTabs[i]), fragments[i], null);
+        }
+        switchTab(R.id.tab_homepage);
         mTabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
             @Override
             public void onTabChanged(String tabId) {
@@ -78,52 +53,38 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
     }
 
-    public void switchTab(int index) {
-
-
-        if (null != mTabHost) {
-            int currIndex = mTabHost.getCurrentTab();
-            if (currIndex == index) {
-                return;
+    public void switchTab(int tabResId) {
+        int index = -1;
+        //查找tabResId在初始化的数组中的的index
+        for (int i = 0; i < TAB_IDS.length; i++) {
+            if (tabResId == TAB_IDS[i]) {
+                index = i;
+                break;
             }
-            mTabHost.setCurrentTab(index);
         }
+        //不存在的resId，返回
+        if (index < 0) {
+            return;
+        }
+        mTabHost.setCurrentTab(index);
+        for (int i = 0; i < mOnTabs.length; i++) {
+            if (i == index) {
+                //让自定义的selector颜色生效
+                mOnTabs[i].setSelected(true);
+            } else if ( mOnTabs[i].isSelected()) {
+                mOnTabs[i].setSelected(false);
+            }
+        }
+
     }
 
+
+    /**
+     * OnClick是在xml布局中设定的
+     */
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.tab_homepage:
-                switchTab(0);
- /*               switchTab(0);
-                clearFocus();
-                setFocus(v);*/
-                break;
-            case R.id.tab_intelligence:
-/*                if (HomesData.getInstance().getRefreshFlag()) {
-                    ToastUtil.makeText(ELMainActivity.this, R.string.service_getdata,
-                            Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                switchTab(1);
-                clearFocus();
-                setFocus(v);*/
-                break;
-            case R.id.tab_mall:
-/*                if (HomesData.getInstance().getRefreshFlag()) {
-                    ToastUtil.makeText(ELMainActivity.this, R.string.service_getdata,
-                            Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                switchTab(2);
-                clearFocus();
-                setFocus(v);*/
-                break;
-            case R.id.tab_mine:
-/*                switchTab(4);
-                clearFocus();
-                setFocus(v);*/
-                break;
             case R.id.tab_voice:
 /*                if (HomesData.getInstance().getRefreshFlag()) {
                     ToastUtil.makeText(ELMainActivity.this, R.string.service_getdata,
@@ -133,6 +94,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startVoiceInterface();*/
                 break;
             default:
+                switchTab(v.getId());
                 break;
         }
     }

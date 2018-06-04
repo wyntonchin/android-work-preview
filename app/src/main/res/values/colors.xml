@@ -9,6 +9,7 @@
     <color name="colorHomepagePrimary">#A6A6B0</color>
     <color name="colorHomepageAccent">#1FC9AC</color>
 
+    <color name="colorTabText">#868690</color>
     <!--common color-->
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorBlack">#000000</color>
