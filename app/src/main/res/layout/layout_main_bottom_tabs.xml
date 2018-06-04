@@ -21,7 +21,8 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:onClick="onClick"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:background="?selectableItemBackgroundBorderless">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -45,7 +46,8 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:onClick="onClick"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:background="?selectableItemBackgroundBorderless">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -74,7 +76,8 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:onClick="onClick"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:background="?selectableItemBackgroundBorderless">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -131,6 +134,7 @@
             android:onClick="onClick"
             android:paddingLeft="8dp"
             android:paddingRight="8dp"
-            android:src="@drawable/comui_tab_post" />
+            android:src="@drawable/comui_tab_post"
+            android:background="?selectableItemBackgroundBorderless"/>
     </RelativeLayout>
 </layout>

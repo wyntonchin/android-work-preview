@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/homepage_bg"
@@ -12,7 +13,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:background="@android:color/transparent"
-        android:fitsSystemWindows="true"
         android:minHeight="?attr/actionBarSize"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
@@ -37,31 +37,36 @@
                 android:layout_height="36dp"
                 android:layout_centerVertical="true"
                 android:layout_toEndOf="@+id/homepage_title"
+                android:background="?selectableItemBackgroundBorderless"
                 android:scaleType="center"
                 android:src="@drawable/homepage_toolbar_down_arrow" />
 
-            <ImageView
+            <ImageButton
                 android:id="@+id/more_img"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:layout_marginEnd="16dp"
-                android:background="@drawable/homepage_toolbar_right_arrow" />
+                android:background="?selectableItemBackgroundBorderless"
+                android:scaleType="center"
+                android:src="@drawable/homepage_toolbar_right_arrow" />
 
-            <ImageView
+            <ImageButton
                 android:id="@+id/msg_img"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
                 android:layout_centerVertical="true"
                 android:layout_marginEnd="28dp"
-                android:layout_toLeftOf="@+id/more_img"
-                android:background="@drawable/homepage_toolbar_right_arrow" />
+                android:layout_toStartOf="@+id/more_img"
+                android:background="?selectableItemBackgroundBorderless"
+                android:scaleType="center"
+                android:src="@drawable/homepage_toolbar_right_arrow" />
         </RelativeLayout>
     </android.support.v7.widget.Toolbar>
 
     <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/layout_refresh"
+        android:id="@+id/swipe_refresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -82,43 +87,15 @@
                 <include
                     android:id="@+id/layout_room"
                     layout="@layout/layout_homepage_room_selector" />
-                <include
-                    android:id="@+id/layout_room2"
-                    layout="@layout/layout_homepage_room_selector" />
-                <include
-                    android:id="@+id/layout_room3"
-                    layout="@layout/layout_homepage_room_selector" />
-                <include
-                    android:id="@+id/layout_room4"
-                    layout="@layout/layout_homepage_room_selector" />
-                <include
-                    android:id="@+id/layout_room5"
-                    layout="@layout/layout_homepage_room_selector" />
 
-                <include
-                    android:id="@+id/layout_room6"
-                    layout="@layout/layout_homepage_room_selector" />
-                <include
-                    android:id="@+id/layout_room7"
-                    layout="@layout/layout_homepage_room_selector" />
-                <include
-                    android:id="@+id/layout_room8"
-                    layout="@layout/layout_homepage_room_selector" />
-
-                <include
-                    android:id="@+id/layout_room9"
-                    layout="@layout/layout_homepage_room_selector" />
-                <include
-                    android:id="@+id/layout_room10"
-                    layout="@layout/layout_homepage_room_selector" />
-                <include
-                    android:id="@+id/layout_room11"
-                    layout="@layout/layout_homepage_room_selector" />
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/device_list"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:scrollbars="none"/>
+                    android:scrollbars="none"
+                    app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                    tools:context=".ui.launch.CommonSenceFragment"
+                    tools:listitem="@layout/adapter_common_sence" />
 
             </LinearLayout>
         </ScrollView>
