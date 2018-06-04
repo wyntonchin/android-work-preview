@@ -12,16 +12,13 @@ import android.view.ViewGroup;
 import com.hismart.easylink.preview.R;
 
 /**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link HomepageFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link HomepageFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * @author qinwendong.
+ * @date 2018/5/30
+ * description HomepageFragment 使用缓存机制，防止重复创建fragment
  */
 public class HomepageFragment extends Fragment {
     private Toolbar mToolbar;
-
+    private View mViewContent; // 缓存视图内容
     public HomepageFragment() {
         // Required empty public constructor
     }
@@ -35,14 +32,18 @@ public class HomepageFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_main_homepage, container, false);
-        mToolbar = view.findViewById(R.id.toolbar);
-        // 代替Actionbar
-        ((AppCompatActivity)getActivity()).setSupportActionBar(mToolbar);
-
-
-        return inflater.inflate(R.layout.fragment_main_homepage, container, false);
+        if (mViewContent == null) {
+            mViewContent = inflater.inflate(R.layout.fragment_main_homepage, container, false);
+            mToolbar = mViewContent.findViewById(R.id.toolbar);
+            // 代替Actionbar
+            ((AppCompatActivity)getActivity()).setSupportActionBar(mToolbar);
+        }
+        // 缓存View判断是否含有parent, 如果有需要从parent删除, 否则发生已有parent的错误.
+        ViewGroup parent = (ViewGroup) mViewContent.getParent();
+        if (parent != null) {
+            parent.removeView(mViewContent);
+        }
+        return mViewContent;
     }
 
     @Override
