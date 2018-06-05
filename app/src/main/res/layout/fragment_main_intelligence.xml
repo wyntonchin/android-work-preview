@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/colorPrimary"
     tools:context=".ui.launch.IntelligenceFragment">
     <!--android:clickable="true"控制了naviIcon的水波纹效果-->
     <android.support.v7.widget.Toolbar

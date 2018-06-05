@@ -7,7 +7,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,7 +43,8 @@ public class IntelligenceFragment extends Fragment {
             mViewContent = inflater.inflate(R.layout.fragment_main_intelligence, container, false);
             tabLayout = mViewContent.findViewById(R.id.tab_layout);
             viewPager = mViewContent.findViewById(R.id.view_pager);
-            //viewPager.setOffscreenPageLimit(2);//指定加载的页数，不回收数据
+            //指定加载的页数，不回收数据
+            viewPager.setOffscreenPageLimit(2);
             initTabLayout();
         }
         // 缓存View判断是否含有parent, 如果有需要从parent删除, 否则发生已有parent的错误.
@@ -63,22 +63,23 @@ public class IntelligenceFragment extends Fragment {
         fragmentManager = getChildFragmentManager();
         //FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         //fragmentTransaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
-        fragmentList.add(new CommonSenceFragment());
-        fragmentList.add(new CommonSenceFragment());
+        fragmentList.add(new CommonSceneFragment());
+        fragmentList.add(new CommonSceneFragment());
 
 
 
         MyPagerAdapter myPagerAdapter = new MyPagerAdapter(fragmentManager, fragmentList, mTitles);
         tabLayout.setSelected(true);
-        //tabLayout.setTabsFromPagerAdapter(myPagerAdapter);
         viewPager.setAdapter(myPagerAdapter);
+        //tabLayout和viewPager建立关联关系
         tabLayout.setupWithViewPager(viewPager);
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 //viewPager.setCurrentItem(tab.getPosition());
-                viewPager.setCurrentItem(tab.getPosition(),false);//false取消自动切换时的滚动动画
+                //设置奇幻tab时fragment的切换
+                viewPager.setCurrentItem(tab.getPosition(),true);//false取消自动切换时的滚动动画
             }
 
             @Override

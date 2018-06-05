@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <!--SwipeRefreshLayout需要套在ScrollView和ListView上的时候才表现的比较友好，（这问题已经被google修复,部分手机还有问题）-->
+    <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/swipe_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorHomepagePrimary">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:name="com.hismart.easylink.preview.ui.launch.CommonSceneFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                tools:context=".ui.launch.CommonSceneFragment"
+                tools:listitem="@layout/adapter_common_scene" />
+
+    </android.support.v4.widget.SwipeRefreshLayout>

@@ -29,4 +29,11 @@
         <item name="android:windowTranslucentStatus">true</item>
     </style>
 
+
+    <style name="AppTheme.HomepageWidgetColor">
+        <!--scroll边界阴影色-->
+        <item name="colorPrimary">@color/colorHomepagePrimary</item>
+
+    </style>
+
 </resources>

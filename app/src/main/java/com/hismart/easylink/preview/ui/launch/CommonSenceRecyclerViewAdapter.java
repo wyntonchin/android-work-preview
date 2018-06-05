@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.hismart.easylink.preview.R;
-import com.hismart.easylink.preview.ui.launch.CommonSenceFragment.OnListFragmentInteractionListener;
 import com.hismart.easylink.preview.ui.launch.dummy.DummyContent.DummyItem;
 
 import java.util.List;
@@ -35,7 +34,7 @@ public class CommonSenceRecyclerViewAdapter extends RecyclerView.Adapter<CommonS
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.adapter_common_sence, parent, false);
+                .inflate(R.layout.adapter_common_scene, parent, false);
         return new ViewHolder(view);
     }
 

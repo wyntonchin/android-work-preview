@@ -14,8 +14,6 @@ import com.hismart.easylink.preview.R;
 import com.hismart.easylink.preview.ui.launch.dummy.DummyContent;
 import com.hismart.easylink.preview.ui.launch.dummy.DummyContent.DummyItem;
 
-import java.util.List;
-
 /**
  * A fragment representing a list of Items.
  * <p/>
@@ -27,7 +25,7 @@ import java.util.List;
  * @date 2018/5/30
  * description
  */
-public class CommonSenceFragment extends Fragment {
+public class CommonSceneFragment extends Fragment {
 
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
@@ -38,13 +36,13 @@ public class CommonSenceFragment extends Fragment {
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public CommonSenceFragment() {
+    public CommonSceneFragment() {
     }
 
     // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
-    public static CommonSenceFragment newInstance(int columnCount) {
-        CommonSenceFragment fragment = new CommonSenceFragment();
+    public static CommonSceneFragment newInstance(int columnCount) {
+        CommonSceneFragment fragment = new CommonSceneFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT, columnCount);
         fragment.setArguments(args);
@@ -63,19 +61,17 @@ public class CommonSenceFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_common_sence_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_intelligence_common_scene, container, false);
 
         // Set the adapter
-        if (view instanceof RecyclerView) {
             Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
+            RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
             if (mColumnCount <= 1) {
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
             recyclerView.setAdapter(new CommonSenceRecyclerViewAdapter(DummyContent.ITEMS));
-        }
         return view;
     }
 

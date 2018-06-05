@@ -4,8 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/homepage_bg"
-    android:orientation="vertical">
+    android:background="@color/colorHomepagePrimaryDark"
+    android:orientation="vertical"
+    android:theme="@style/AppTheme.HomepageWidgetColor">
     <!--24dp 是常用手机状态栏高度，设置此方式较为简单，可以保证代码控制逻辑不那么复杂-->
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -69,8 +70,8 @@
         android:id="@+id/swipe_refresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-        <ScrollView
+        <!--android:nestedScrollingEnabled="false" scroll中使用没问题,NestedScrollView直接使用有null问题-->
+        <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scrollbars="none">
@@ -78,7 +79,10 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:paddingBottom="6dp"
+                android:paddingEnd="10dp"
+                android:paddingStart="10dp">
 
                 <include
                     android:id="@+id/layout_weather"
@@ -86,18 +90,21 @@
 
                 <include
                     android:id="@+id/layout_room"
-                    layout="@layout/layout_homepage_room_selector" />
+                    layout="@layout/layout_homepage_room_list" />
 
+                <!--因为嵌套滑动，所以设置android:nestedScrollingEnabled="false"不可以滑动，否则滑动效果有冲突-->
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/device_list"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:nestedScrollingEnabled="false"
+
                     android:scrollbars="none"
                     app:layoutManager="android.support.v7.widget.LinearLayoutManager"
-                    tools:context=".ui.launch.CommonSenceFragment"
-                    tools:listitem="@layout/adapter_common_sence" />
+                    tools:context=".ui.launch.CommonSceneFragment"
+                    tools:listitem="@layout/adapter_common_scene" />
 
             </LinearLayout>
-        </ScrollView>
+        </android.support.v4.widget.NestedScrollView>
     </android.support.v4.widget.SwipeRefreshLayout>
 </LinearLayout>
