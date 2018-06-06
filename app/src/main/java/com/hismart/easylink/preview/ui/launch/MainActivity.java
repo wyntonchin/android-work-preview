@@ -41,7 +41,7 @@ public class MainActivity extends BaseCompatActivity implements View.OnClickList
                     Manifest.permission.WRITE_EXTERNAL_STORAGE,
                     Manifest.permission.READ_EXTERNAL_STORAGE
             };
-            PermissionDeniedActivity.startWith(MainActivity.this.getApplicationContext(), permissions, "文件读写", null);
+            PermissionDeniedActivity.startWith(MainActivity.this.getApplicationContext(), permissions, "文件读写");
         }
     }
 

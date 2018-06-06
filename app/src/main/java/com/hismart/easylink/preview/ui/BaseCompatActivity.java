@@ -175,6 +175,7 @@ public abstract class BaseCompatActivity extends AppCompatActivity {
                     }
                 }
                 break;
+                default:
         }
     }
 
