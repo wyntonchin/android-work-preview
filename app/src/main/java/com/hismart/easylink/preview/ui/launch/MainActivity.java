@@ -1,6 +1,9 @@
 package com.hismart.easylink.preview.ui.launch;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentTabHost;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -9,13 +12,15 @@ import android.view.View;
 import android.widget.TabHost;
 
 import com.hismart.easylink.preview.R;
+import com.hismart.easylink.preview.ui.BaseCompatActivity;
+import com.hismart.easylink.preview.ui.launch.permission.PermissionDeniedActivity;
 
 /**
  * @author qinwendong.
  * @date 2018/5/30
  * description LaunchActivity作为主界面的容器
  */
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends BaseCompatActivity implements View.OnClickListener {
     private FragmentTabHost mTabHost = null;
     /**
      * 声明全局tab list数组，减少重复代码
@@ -29,6 +34,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initTabHost();
+
+    }
+
+    private void requestPermission(){
+        int permission = ActivityCompat.checkSelfPermission(MainActivity.this.getApplicationContext(), Manifest.permission.INTERNET);
+        if (permission != PackageManager.PERMISSION_GRANTED) {
+            String[] permissions = new String[]{
+                    Manifest.permission.INTERNET,
+            };
+            PermissionDeniedActivity.startWith(MainActivity.this.getApplicationContext(), permissions, "网络权限", new Runnable() {
+                @Override
+                public void run() {
+                    //initWebView();
+                }
+            });
+        }
     }
 
     private void initTabHost() {
@@ -38,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         LayoutInflater inflate = LayoutInflater.from(this);
 
 
-        Class<?>[] fragments = new Class[]{HomepageFragment.class, IntelligenceFragment.class, HomepageFragment.class, HomepageFragment.class};
+        Class<?>[] fragments = new Class[]{HomepageFragment.class, IntelligenceFragment.class, MallFragment.class, HomepageFragment.class};
         for (int i = 0; i < fragments.length; i++) {
             mUnderTabs[i] = inflate.inflate(R.layout.item_homepage_cover_tabs, null);
             mOnTabs[i] = findViewById(TAB_IDS[i]);
@@ -96,6 +117,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             default:
                 switchTab(v.getId());
                 break;
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        //返回键控制网页返回
+        if(mTabHost.getCurrentTab() == 2){
+            //TODO web back
+            //doWebBack();
+            return;
+        }else{
+            super.onBackPressed();
         }
     }
 }

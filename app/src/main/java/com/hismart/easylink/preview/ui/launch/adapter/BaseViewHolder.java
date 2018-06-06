@@ -1,4 +1,4 @@
-package com.hismart.easylink.preview.ui.adapter;
+package com.hismart.easylink.preview.ui.launch.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;

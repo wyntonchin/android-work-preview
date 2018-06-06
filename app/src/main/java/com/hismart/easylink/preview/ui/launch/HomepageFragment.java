@@ -126,6 +126,11 @@ public class HomepageFragment extends Fragment{
     }
 
     @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+    }
+
+    @Override
     public void onAttach(Context context) {
         super.onAttach(context);
     }
