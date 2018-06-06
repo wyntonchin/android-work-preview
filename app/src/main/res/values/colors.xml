@@ -3,12 +3,13 @@
     <color name="colorPrimary">#1FC9AC</color>
     <color name="colorPrimaryDark">#00C099</color>
     <color name="colorAccent">#1FC9AC</color>
-    <color name="colorSelectedGray">#999999</color>
+
 
     <color name="colorHomepagePrimaryDark">#868690</color>
     <color name="colorHomepagePrimary">#A6A6B0</color>
     <color name="colorHomepageAccent">#1FC9AC</color>
 
+    <color name="colorTab">#1FC9AC</color>
     <color name="colorTabText">#868690</color>
     <!--common color-->
     <color name="colorWhite">#FFFFFF</color>

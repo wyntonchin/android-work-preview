@@ -1,140 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="72dp">
 
-    <RelativeLayout
+    <LinearLayout
+        android:id="@+id/buttonLayout"
         android:layout_width="match_parent"
-        android:layout_height="72dp">
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/transparent"
+        android:orientation="horizontal">
 
         <LinearLayout
-            android:id="@+id/buttonLayout"
+            android:id="@+id/tab_homepage"
             android:layout_width="match_parent"
             android:layout_height="54dp"
-            android:layout_alignParentBottom="true"
-            android:background="@color/colorWhite"
-            android:orientation="horizontal">
+            android:layout_gravity="bottom"
+            android:layout_weight="1"
+            android:background="?selectableItemBackgroundBorderless"
+            android:gravity="center"
+            android:onClick="onClick"
+            android:orientation="vertical">
 
-            <LinearLayout
-                android:id="@+id/tab_homepage"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="bottom"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:onClick="onClick"
-                android:orientation="vertical"
-                android:background="?selectableItemBackgroundBorderless">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/selector_home" />
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/selector_home" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="12sp"
-                    android:text="主页"
-                    android:checked="true"
-                    android:textColor="@drawable/selector_tab_text_color" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="主页"
+                android:textColor="@drawable/selector_tab_text_color"
+                android:textSize="12sp" />
 
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/tab_intelligence"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="bottom"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:onClick="onClick"
-                android:orientation="vertical"
-                android:background="?selectableItemBackgroundBorderless">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/selector_find" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="12sp"
-                    android:text="智能"
-                    android:checked="true"
-                    android:textColor="@drawable/selector_tab_text_color" />
-
-            </LinearLayout>
-            <!--此处view给voice占一个位置，在布局后面遮挡覆盖-->
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
-
-            <LinearLayout
-                android:id="@+id/tab_mall"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="bottom"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:onClick="onClick"
-                android:orientation="vertical"
-                android:background="?selectableItemBackgroundBorderless">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/selector_message" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="12sp"
-                    android:text="商城"
-                    android:checked="true"
-                    android:textColor="@drawable/selector_tab_text_color" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/tab_mine"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="bottom"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:onClick="onClick"
-                android:orientation="vertical"
-                android:background="?selectableItemBackgroundBorderless">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/selector_mine" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="12sp"
-                    android:text="我的"
-                    android:checked="true"
-                    android:textColor="@drawable/selector_tab_text_color" />
-
-            </LinearLayout>
         </LinearLayout>
 
-        <View
+        <LinearLayout
+            android:id="@+id/tab_intelligence"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="18dp"
-            android:background="@drawable/shape_line_tab_top_shadow" />
+            android:layout_height="54dp"
+            android:layout_gravity="bottom"
+            android:layout_weight="1"
+            android:background="?selectableItemBackgroundBorderless"
+            android:gravity="center"
+            android:onClick="onClick"
+            android:orientation="vertical">
 
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/selector_find" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="智能"
+                android:textColor="@drawable/selector_tab_text_color"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+        <!--此处view给voice占一个位置，在布局后面遮挡覆盖-->
         <ImageView
             android:id="@+id/tab_voice"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_centerHorizontal="true"
-            android:paddingBottom="22dp"
+            android:layout_weight="1"
+            android:layout_marginBottom="12dp"
+            android:background="?selectableItemBackgroundBorderless"
             android:onClick="onClick"
-            android:paddingLeft="8dp"
-            android:paddingRight="8dp"
-            android:src="@drawable/comui_tab_post"
-            android:background="?selectableItemBackgroundBorderless"/>
-    </RelativeLayout>
-</layout>
+            android:scaleType="center"
+            android:layout_gravity="top"
+            android:src="@drawable/comui_tab_post" />
+
+        <LinearLayout
+            android:id="@+id/tab_mall"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:layout_gravity="bottom"
+            android:layout_weight="1"
+            android:background="?selectableItemBackgroundBorderless"
+            android:gravity="center"
+            android:onClick="onClick"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/selector_message" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="商城"
+                android:textColor="@drawable/selector_tab_text_color"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/tab_mine"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:layout_gravity="bottom"
+            android:layout_weight="1"
+            android:background="?selectableItemBackgroundBorderless"
+            android:gravity="center"
+            android:onClick="onClick"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/selector_mine" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="我的"
+                android:textColor="@drawable/selector_tab_text_color"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="18dp"
+        android:background="@drawable/shape_line_tab_top_shadow" />
+
+
+</RelativeLayout>

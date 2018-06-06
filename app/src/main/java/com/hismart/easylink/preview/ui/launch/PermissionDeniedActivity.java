@@ -1,4 +1,4 @@
-package com.hismart.easylink.preview.ui.launch.permission;
+package com.hismart.easylink.preview.ui.launch;
 
 import android.content.Context;
 import android.content.DialogInterface;

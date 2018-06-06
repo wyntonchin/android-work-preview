@@ -15,19 +15,18 @@
         android:layout_marginTop="24dp"
         android:background="@android:color/transparent"
         android:clickable="true"
-        android:focusable="true"
-        app:navigationIcon="@drawable/toolbar_icon_back">
+        android:focusable="true">
 
         <android.support.design.widget.TabLayout
             android:id="@+id/tab_layout"
             android:layout_width="160dp"
-            android:layout_height="match_parent"
+            android:layout_height="46dp"
             android:layout_gravity="center"
             android:background="@android:color/transparent"
             app:tabIndicatorColor="@android:color/white"
             app:tabMode="fixed"
             app:tabSelectedTextColor="@android:color/white"
-            app:tabTextColor="#aed6ff" />
+            app:tabTextColor="@color/colorTabText" />
 
         <ImageButton
             android:layout_width="36dp"

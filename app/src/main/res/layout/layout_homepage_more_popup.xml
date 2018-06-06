@@ -12,8 +12,9 @@
         android:layout_marginEnd="10dp">
 
         <LinearLayout
+            android:id="@+id/manual_add"
             android:layout_width="160dp"
-            android:layout_height="36dp"
+            android:layout_height="54dp"
             android:layout_marginEnd="16dp"
             android:background="?selectableItemBackgroundBorderless"
             android:clickable="true"
@@ -22,13 +23,11 @@
             android:paddingEnd="16dp">
 
             <ImageView
-                android:id="@+id/iv_item"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@mipmap/ic_launcher" />
 
             <TextView
-                android:id="@+id/tv_item"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="添加设备" />
@@ -40,9 +39,9 @@
             android:background="@color/colorHomepagePrimaryDark" />
 
         <LinearLayout
-            android:id="@+id/manual_add"
+            android:id="@+id/scan_code"
             android:layout_width="160dp"
-            android:layout_height="36dp"
+            android:layout_height="54dp"
             android:background="?selectableItemBackgroundBorderless"
             android:clickable="true"
             android:gravity="center_vertical"

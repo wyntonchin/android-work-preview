@@ -14,8 +14,10 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.PopupWindow;
 
 import com.hismart.easylink.preview.R;
@@ -27,13 +29,15 @@ import com.hismart.easylink.preview.ui.launch.dummy.DummyContent;
  * @date 2018/5/30
  * description HomepageFragment 使用缓存机制，防止重复创建fragment
  */
-public class HomepageFragment extends Fragment{
+public class HomepageFragment extends Fragment {
     private Toolbar mToolbar;
     private PopupWindow mPopupWindow;
     private SwipeRefreshLayout mSwipeRefresh;
     private View mContentView; // 缓存视图内容
-    private View mMsgImg;
-    private View mMoreImg;
+    private ImageView mMsgImg;
+    private ImageView mMoreImg;
+    private View mManualAddView;
+    private View mScanCodeView;
 
     public HomepageFragment() {
         // Required empty public constructor
@@ -59,31 +63,27 @@ public class HomepageFragment extends Fragment{
         return mContentView;
     }
 
-    private void initContentView(LayoutInflater inflater, ViewGroup container){
+    private void initContentView(LayoutInflater inflater, ViewGroup container) {
         mContentView = inflater.inflate(R.layout.fragment_main_homepage, container, false);
         mToolbar = mContentView.findViewById(R.id.toolbar);
         mMsgImg = mToolbar.findViewById(R.id.msg_img);
-        mMoreImg =  mToolbar.findViewById(R.id.more_img);
+        mMoreImg = mToolbar.findViewById(R.id.more_img);
         mMoreImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (!mPopupWindow.isShowing()) {
-                    mPopupWindow.showAsDropDown(mMoreImg,-100,28);
+                    mPopupWindow.showAsDropDown(mMoreImg, 0, 28);
                     //mPopupWindow.showAtLocation(mToolbar, Gravity.TOP|Gravity.END, 0,0);
    /*                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
                         mPopupWindow.showAsDropDown(mMoreImg,-10,20);
                     }else{
                         mPopupWindow.showAsDropDown(mMoreImg);
                     }*/
-                }else{
-                    mPopupWindow.dismiss();
+                } else {
+                    //mPopupWindow.dismiss();
                 }
             }
         });
-        View popupView = inflater.inflate(R.layout.layout_homepage_more_popup, null);
-        mPopupWindow = new PopupWindow(popupView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        mPopupWindow.setOutsideTouchable(true);
-
         mSwipeRefresh = mContentView.findViewById(R.id.swipe_refresh);
         //设置滑动生效的距离
         mSwipeRefresh.setDistanceToTriggerSync(300);
@@ -107,19 +107,44 @@ public class HomepageFragment extends Fragment{
 
         initRoomRecycler(mContentView);
         initDeviceRecycler(mContentView);
+        //考虑延迟加载
+        initPopupWindow();
+    }
+
+    private void initPopupWindow(){
+        View popupView = getLayoutInflater().inflate(R.layout.layout_homepage_more_popup, null);
+        mPopupWindow = new PopupWindow(popupView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        mPopupWindow.setOutsideTouchable(true);
+        //设置popup拦截touch事件，否则弹出时点击按钮区域，事件依然会传递到按钮
+        mPopupWindow.setFocusable(true);
+
+        mManualAddView = popupView.findViewById(R.id.manual_add);
+        mManualAddView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        mScanCodeView = popupView.findViewById(R.id.scan_code);
+        mScanCodeView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
     private void initRoomRecycler(View contentView) {
-            RecyclerView recyclerView = contentView.findViewById(R.id.room_list);
-            LinearLayoutManager linearManager = new LinearLayoutManager(contentView.getContext());
-            linearManager.setOrientation(RecyclerView.HORIZONTAL);
-            recyclerView.setLayoutManager(linearManager);
-            recyclerView.setAdapter(new CommonSenceRecyclerViewAdapter(DummyContent.ITEMS));
+        RecyclerView recyclerView = contentView.findViewById(R.id.room_list);
+        LinearLayoutManager linearManager = new LinearLayoutManager(contentView.getContext());
+        linearManager.setOrientation(RecyclerView.HORIZONTAL);
+        recyclerView.setLayoutManager(linearManager);
+        recyclerView.setAdapter(new CommonSenceRecyclerViewAdapter(DummyContent.ITEMS));
     }
 
     private void initDeviceRecycler(View contentView) {
         RecyclerView recyclerView = contentView.findViewById(R.id.device_list);
-        GridLayoutManager gridManager = new GridLayoutManager(contentView.getContext(),2);
+        GridLayoutManager gridManager = new GridLayoutManager(contentView.getContext(), 2);
         gridManager.setOrientation(RecyclerView.VERTICAL);
         recyclerView.setLayoutManager(gridManager);
         recyclerView.setAdapter(new CommonSenceRecyclerViewAdapter(DummyContent.ITEMS));

@@ -1,19 +1,15 @@
 package com.hismart.easylink.preview.ui.launch;
 
-import android.Manifest;
 import android.annotation.TargetApi;
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebChromeClient;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
@@ -21,7 +17,6 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.hismart.easylink.preview.R;
-import com.hismart.easylink.preview.ui.launch.permission.PermissionDeniedActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -90,7 +85,7 @@ public class MallFragment extends Fragment {
 
         if (mContentView == null) {
             mContentView = inflater.inflate(R.layout.fragment_main_mall, container, false);
-            initWebView(mContentView);
+            //initWebView(mContentView);
         }
         // 缓存View判断是否含有parent, 如果有需要从parent删除, 否则发生已有parent的错误.
         ViewGroup parent = (ViewGroup) mContentView.getParent();
@@ -146,22 +141,6 @@ public class MallFragment extends Fragment {
         webSettings.setAppCacheEnabled(true);//是否使用缓存
         webSettings.setDomStorageEnabled(true);//DOM Storage
         webSettings.setAppCacheMaxSize(5 * 1048576);
-
-       webSettings.setBuiltInZoomControls(true);
-        webSettings.setJavaScriptEnabled(true);
-        webSettings.setJavaScriptCanOpenWindowsAutomatically(true);
-        webSettings.setLoadsImagesAutomatically(true);
-        webSettings.setAllowFileAccess(true);//资源加载超时操作
-        webSettings.setAllowFileAccessFromFileURLs(true);
-        webSettings.setTextSize(WebSettings.TextSize.NORMAL);
-        webSettings.setDomStorageEnabled(true);
-        webSettings.setDatabaseEnabled(true);
-        webSettings.setAppCacheEnabled(true);
-        webSettings.setGeolocationEnabled(true);
-        webSettings.setBlockNetworkImage(true);
-        webSettings.setAppCacheMaxSize(5 * 1048576);
-        mWebView.loadUrl("https://m.hisense.com");
-        //webSettings.setCacheMode();
     }
 
 

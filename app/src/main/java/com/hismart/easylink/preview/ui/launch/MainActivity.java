@@ -5,15 +5,12 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentTabHost;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TabHost;
 
 import com.hismart.easylink.preview.R;
 import com.hismart.easylink.preview.ui.BaseCompatActivity;
-import com.hismart.easylink.preview.ui.launch.permission.PermissionDeniedActivity;
 
 /**
  * @author qinwendong.
@@ -34,22 +31,28 @@ public class MainActivity extends BaseCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initTabHost();
-
+        requestPermission();
     }
 
     private void requestPermission(){
-        int permission = ActivityCompat.checkSelfPermission(MainActivity.this.getApplicationContext(), Manifest.permission.INTERNET);
+        int permission = ActivityCompat.checkSelfPermission(MainActivity.this.getApplicationContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE);
         if (permission != PackageManager.PERMISSION_GRANTED) {
             String[] permissions = new String[]{
-                    Manifest.permission.INTERNET,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                    Manifest.permission.READ_EXTERNAL_STORAGE
             };
-            PermissionDeniedActivity.startWith(MainActivity.this.getApplicationContext(), permissions, "网络权限", new Runnable() {
-                @Override
-                public void run() {
-                    //initWebView();
-                }
-            });
+            PermissionDeniedActivity.startWith(MainActivity.this.getApplicationContext(), permissions, "文件读写", null);
         }
+    }
+
+    @Override
+    protected void onPermissionGranted(String permission) {
+        super.onPermissionGranted(permission);
+    }
+
+    @Override
+    protected void onPermissionFailed(String permission) {
+        super.onPermissionFailed(permission);
     }
 
     private void initTabHost() {
@@ -57,8 +60,6 @@ public class MainActivity extends BaseCompatActivity implements View.OnClickList
         mTabHost.setup(this, getSupportFragmentManager(),
                 android.R.id.tabcontent);
         LayoutInflater inflate = LayoutInflater.from(this);
-
-
         Class<?>[] fragments = new Class[]{HomepageFragment.class, IntelligenceFragment.class, MallFragment.class, HomepageFragment.class};
         for (int i = 0; i < fragments.length; i++) {
             mUnderTabs[i] = inflate.inflate(R.layout.item_homepage_cover_tabs, null);
