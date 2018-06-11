@@ -11,6 +11,7 @@ import android.widget.TabHost;
 
 import com.hismart.easylink.preview.R;
 import com.hismart.easylink.preview.ui.BaseCompatActivity;
+import com.hismart.easylink.preview.ui.StatusBarUtil;
 
 /**
  * @author qinwendong.
@@ -30,29 +31,10 @@ public class MainActivity extends BaseCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //StatusBarUtil.setColor(this, getResources().getColor(R.color.colorPrimary));
+        //在activity上面add了一个statusbar高度的一个view
+        StatusBarUtil.setTranslucentForImageViewInFragment(this, null);
         initTabHost();
-        requestPermission();
-    }
-
-    private void requestPermission(){
-        int permission = ActivityCompat.checkSelfPermission(MainActivity.this.getApplicationContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE);
-        if (permission != PackageManager.PERMISSION_GRANTED) {
-            String[] permissions = new String[]{
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                    Manifest.permission.READ_EXTERNAL_STORAGE
-            };
-            PermissionDeniedActivity.startWith(MainActivity.this.getApplicationContext(), permissions, "文件读写");
-        }
-    }
-
-    @Override
-    protected void onPermissionGranted(String permission) {
-        super.onPermissionGranted(permission);
-    }
-
-    @Override
-    protected void onPermissionFailed(String permission) {
-        super.onPermissionFailed(permission);
     }
 
     private void initTabHost() {

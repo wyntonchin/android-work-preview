@@ -1,25 +1,24 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="AppTheme.ToolbarPopupTheme" parent="ThemeOverlay.AppCompat.Light">
-        <!-- 设置Menu菜单的背景色，这里是个选择器，按下背景置灰 -->
-       <!-- <item name="android:itemBackground">@drawable/item_pressed_selector</item>-->
-        <!-- 设置Menu菜单的字体颜色 -->
-        <item name="android:textColorPrimary">@android:color/black</item>
-        <!-- 设置Menu窗口不覆盖Toolbar视图 -->
-        <item name="overlapAnchor">false</item>
-    </style>
-
     <style name="AppTheme.TranslucentStatus">
+        <item name="android:windowActionBar">false</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@drawable/homepage_bg</item>
     </style>
 
+    <style name="AppTheme.HomepageWidgetColor">
+        <!--scroll边界阴影色-->
+        <item name="colorPrimary">@color/colorHomepagePrimary</item>
+
+    </style>
 </resources>

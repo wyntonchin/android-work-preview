@@ -6,13 +6,28 @@ android {
         applicationId "com.hismart.easylink.preview"
         minSdkVersion 17
         targetSdkVersion 27
-        versionCode 1
-        versionName "1.0"
+        versionCode 40500101
+        versionName "4.05.001.01"
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            applicationVariants.all { variant ->
+                variant.outputs.each { output ->
+                    //def outputFile = output.outputFile
+                    def fileName = null
+                    if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                        // 输出apk名称为XXapp1.4.0_2017-02-14.apk
+                        if (variant.buildType.name.equals('release')) {
+                            fileName = "XXapp${defaultConfig.versionName}_${releaseTime()}.apk"
+                        } else if (variant.buildType.name.equals('debug')) {
+                            fileName = "XXapp${defaultConfig.versionName}_${releaseTime()}_debug.apk"
+                        }
+                        output.outputFile = new File(outputFile.parent, fileName)
+                    }
+                }
+            }
         }
     }
     //qinwendong 开启dataBinging，可以使用layout标签，这里暂时不需要
@@ -26,6 +41,10 @@ android {
         }
     }
 }
+def releaseTime() {
+    return new Date().format("yyyy-MM-dd", TimeZone.getTimeZone("UTC"))
+}
+
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')

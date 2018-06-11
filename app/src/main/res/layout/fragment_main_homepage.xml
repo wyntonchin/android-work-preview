@@ -7,12 +7,15 @@
     android:background="@color/colorHomepagePrimaryDark"
     android:orientation="vertical"
     android:theme="@style/AppTheme.HomepageWidgetColor">
-    <!--24dp 是常用手机状态栏高度，设置此方式较为简单，可以保证代码控制逻辑不那么复杂-->
+    <View
+        android:id="@+id/fake_status_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/status_bar_view_height"
+        android:background="@color/colorTransparent"/>
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
         android:background="@android:color/transparent"
         android:minHeight="?attr/actionBarSize"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"

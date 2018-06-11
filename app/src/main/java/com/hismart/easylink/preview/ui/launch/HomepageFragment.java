@@ -18,9 +18,11 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 
 import com.hismart.easylink.preview.R;
+import com.hismart.easylink.preview.ui.StatusBarUtil;
 import com.hismart.easylink.preview.ui.launch.dummy.DummyContent;
 
 
@@ -65,6 +67,12 @@ public class HomepageFragment extends Fragment {
 
     private void initContentView(LayoutInflater inflater, ViewGroup container) {
         mContentView = inflater.inflate(R.layout.fragment_main_homepage, container, false);
+        View statusBar = mContentView.findViewById(R.id.fake_status_bar);
+        if(getActivity() != null){
+            //动态设置statusBar的高度，适配不同手机
+            statusBar.getLayoutParams().height = StatusBarUtil.getStatusBarHeight(getActivity().getApplicationContext());
+        }
+
         mToolbar = mContentView.findViewById(R.id.toolbar);
         mMsgImg = mToolbar.findViewById(R.id.msg_img);
         mMoreImg = mToolbar.findViewById(R.id.more_img);
