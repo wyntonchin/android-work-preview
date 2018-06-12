@@ -1,9 +1,6 @@
 package com.hismart.easylink.preview.ui.launch;
 
-import android.Manifest;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentTabHost;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,9 +39,9 @@ public class MainActivity extends BaseCompatActivity implements View.OnClickList
         mTabHost.setup(this, getSupportFragmentManager(),
                 android.R.id.tabcontent);
         LayoutInflater inflate = LayoutInflater.from(this);
-        Class<?>[] fragments = new Class[]{HomepageFragment.class, IntelligenceFragment.class, MallFragment.class, HomepageFragment.class};
+        Class<?>[] fragments = new Class[]{HomepageFragment.class, IntelligenceFragment.class, MallFragment.class, MimeFragment.class};
         for (int i = 0; i < fragments.length; i++) {
-            mUnderTabs[i] = inflate.inflate(R.layout.item_homepage_cover_tabs, null);
+            mUnderTabs[i] = inflate.inflate(R.layout.homepage_fake_tabs_item, null);
             mOnTabs[i] = findViewById(TAB_IDS[i]);
             mTabHost.addTab(mTabHost.newTabSpec("tab" + i).setIndicator(mUnderTabs[i]), fragments[i], null);
         }

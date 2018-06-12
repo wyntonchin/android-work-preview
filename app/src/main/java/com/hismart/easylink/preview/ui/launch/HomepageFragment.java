@@ -1,29 +1,27 @@
 package com.hismart.easylink.preview.ui.launch;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.os.Build;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.ImageButton;
 import android.widget.PopupWindow;
+import android.widget.Toast;
 
 import com.hismart.easylink.preview.R;
 import com.hismart.easylink.preview.ui.StatusBarUtil;
 import com.hismart.easylink.preview.ui.launch.dummy.DummyContent;
+import android.support.v7.widget.ListPopupWindow;
 
 
 /**
@@ -33,13 +31,14 @@ import com.hismart.easylink.preview.ui.launch.dummy.DummyContent;
  */
 public class HomepageFragment extends Fragment {
     private Toolbar mToolbar;
-    private PopupWindow mPopupWindow;
+   // private PopupWindow popupWindow;
     private SwipeRefreshLayout mSwipeRefresh;
     private View mContentView; // 缓存视图内容
-    private ImageView mMsgImg;
-    private ImageView mMoreImg;
-    private View mManualAddView;
-    private View mScanCodeView;
+    private ImageButton mDropdown;
+    private ImageButton mMsgImg;
+    private ImageButton mMoreImg;
+/*    private View mManualAddView;
+    private View mScanCodeView;*/
 
     public HomepageFragment() {
         // Required empty public constructor
@@ -68,28 +67,25 @@ public class HomepageFragment extends Fragment {
     private void initContentView(LayoutInflater inflater, ViewGroup container) {
         mContentView = inflater.inflate(R.layout.fragment_main_homepage, container, false);
         View statusBar = mContentView.findViewById(R.id.fake_status_bar);
-        if(getActivity() != null){
+        if (getActivity() != null) {
             //动态设置statusBar的高度，适配不同手机
             statusBar.getLayoutParams().height = StatusBarUtil.getStatusBarHeight(getActivity().getApplicationContext());
         }
 
         mToolbar = mContentView.findViewById(R.id.toolbar);
+        mDropdown = mContentView.findViewById(R.id.dropdown_img);
+        mDropdown.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showListPopupWindow(mToolbar);
+            }
+        });
         mMsgImg = mToolbar.findViewById(R.id.msg_img);
         mMoreImg = mToolbar.findViewById(R.id.more_img);
         mMoreImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!mPopupWindow.isShowing()) {
-                    mPopupWindow.showAsDropDown(mMoreImg, 0, 28);
-                    //mPopupWindow.showAtLocation(mToolbar, Gravity.TOP|Gravity.END, 0,0);
-   /*                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                        mPopupWindow.showAsDropDown(mMoreImg,-10,20);
-                    }else{
-                        mPopupWindow.showAsDropDown(mMoreImg);
-                    }*/
-                } else {
-                    //mPopupWindow.dismiss();
-                }
+                showPopupWindow();
             }
         });
         mSwipeRefresh = mContentView.findViewById(R.id.swipe_refresh);
@@ -106,40 +102,13 @@ public class HomepageFragment extends Fragment {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-
             }
         });
-        // 代替Actionbar
-        //((AppCompatActivity) getActivity()).setSupportActionBar(mToolbar);
-
 
         initRoomRecycler(mContentView);
         initDeviceRecycler(mContentView);
-        //考虑延迟加载
-        initPopupWindow();
-    }
-
-    private void initPopupWindow(){
-        View popupView = getLayoutInflater().inflate(R.layout.layout_homepage_more_popup, null);
-        mPopupWindow = new PopupWindow(popupView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        mPopupWindow.setOutsideTouchable(true);
-        //设置popup拦截touch事件，否则弹出时点击按钮区域，事件依然会传递到按钮
-        mPopupWindow.setFocusable(true);
-
-        mManualAddView = popupView.findViewById(R.id.manual_add);
-        mManualAddView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-        mScanCodeView = popupView.findViewById(R.id.scan_code);
-        mScanCodeView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
+        //TODO 考虑延迟加载
+        //PopupWindow();
     }
 
     private void initRoomRecycler(View contentView) {
@@ -156,6 +125,62 @@ public class HomepageFragment extends Fragment {
         gridManager.setOrientation(RecyclerView.VERTICAL);
         recyclerView.setLayoutManager(gridManager);
         recyclerView.setAdapter(new CommonSenceRecyclerViewAdapter(DummyContent.ITEMS));
+    }
+
+    public void showListPopupWindow(View view) {
+        String items[] = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9","10","11","12","13","14","15" };
+        final ListPopupWindow listPopupWindow = new ListPopupWindow(this.getActivity());
+        listPopupWindow.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
+        listPopupWindow.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
+        // ListView适配器
+        listPopupWindow.setAdapter(new ArrayAdapter<>(this.getActivity().getApplicationContext(), R.layout.homepage_popup_list_item, items));
+        // 选择item的监听事件
+        listPopupWindow.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int pos, long id) {
+                Toast.makeText(HomepageFragment.this.getActivity().getApplicationContext(), "选择:" + pos, Toast.LENGTH_SHORT).show();
+                listPopupWindow.dismiss();
+            }
+        });
+
+        // ListPopupWindow的锚,弹出框的位置是相对当前View的位置
+        listPopupWindow.setAnchorView(view);
+        // ListPopupWindow 距锚view的距离
+        listPopupWindow.setHorizontalOffset(0);
+        listPopupWindow.setVerticalOffset(0);
+        //外边界点击关闭
+        listPopupWindow.setModal(true);
+        listPopupWindow.show();
+    }
+
+    private void showPopupWindow() {
+        final View popupView = getLayoutInflater().inflate(R.layout.layout_homepage_more_popup, null);
+        final PopupWindow popupWindow = new PopupWindow(popupView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        popupWindow.setOutsideTouchable(true);
+        //设置popup拦截touch事件，否则弹出时点击按钮区域，事件依然会传递到按钮
+        popupWindow.setFocusable(true);
+
+        View manualAddView = popupView.findViewById(R.id.manual_add);
+        manualAddView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (getActivity() != null) {
+                    popupWindow.dismiss();
+                    Intent intent = new Intent();
+                    intent.setClass(getActivity().getApplicationContext(),ManuaAddDeviceActivity.class);
+                    startActivity(intent);
+                }
+            }
+        });
+        View scanCodeView = popupView.findViewById(R.id.scan_code);
+        scanCodeView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popupWindow.dismiss();
+
+            }
+        });
+        popupWindow.showAsDropDown(mMoreImg, 0, 28);
     }
 
     @Override

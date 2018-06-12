@@ -188,7 +188,7 @@ public abstract class ToolbarBaseCompatActivity extends BaseCompatActivity {
      * 隐藏toolbar的阴影
      */
     protected void hideToolbarLine() {
-        LinearLayout barLine = (LinearLayout) findViewById(R.id.actionbar_line);
+        LinearLayout barLine = findViewById(R.id.actionbar_line);
         if (barLine != null) {
             barLine.setVisibility(View.GONE);
         }

@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#1FC9AC</color>
-    <color name="colorPrimaryDark">#00C099</color>
+    // A TaskDescription's primary color should be opaque
+    //android5.0+要求Primary系列的颜色必须是缺省的或者是透明度为ff的
+    <color name="colorPrimary">#FF1FC9AC</color>
+    <color name="colorPrimaryDark">#FF10715E</color>
     <color name="colorAccent">#1FC9AC</color>
 
 
-    <color name="colorHomepagePrimaryDark">#868690</color>
-    <color name="colorHomepagePrimary">#A6A6B0</color>
+    <color name="colorHomepagePrimaryDark">#FF868690</color>
+    <color name="colorHomepagePrimary">#FFA6A6B0</color>
     <color name="colorHomepageAccent">#1FC9AC</color>
 
     <color name="colorTab">#1FC9AC</color>
