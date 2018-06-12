@@ -65,7 +65,7 @@
                 android:layout_toStartOf="@+id/more_img"
                 android:background="?selectableItemBackgroundBorderless"
                 android:scaleType="center"
-                android:src="@drawable/homepage_toolbar_right_arrow" />
+                android:src="@drawable/homepage_toolbar_msg" />
         </RelativeLayout>
     </android.support.v7.widget.Toolbar>
 

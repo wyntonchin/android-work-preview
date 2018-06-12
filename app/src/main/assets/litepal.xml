@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>  
+<litepal>  
+    <dbname value="core"/>
+  
+    <version value="1" />
+  
+    <list>
+        <mapping class="com.hismart.easylink.preview.ui.launch.entity.HouseEntity"/>
+        <mapping class="com.hismart.easylink.preview.ui.launch.entity.RoomEntity"/>
+        <mapping class="com.hismart.easylink.preview.ui.launch.entity.DeviceEntity"/>
+    </list>  
+</litepal> 

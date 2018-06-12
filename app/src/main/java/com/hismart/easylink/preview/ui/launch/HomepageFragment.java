@@ -22,6 +22,8 @@ import com.hismart.easylink.preview.R;
 import com.hismart.easylink.preview.ui.StatusBarUtil;
 import com.hismart.easylink.preview.ui.launch.adapter.HomepageRoomAdapter;
 import com.hismart.easylink.preview.ui.launch.dummy.DummyContent;
+import com.hismart.easylink.preview.ui.launch.entity.RoomEntity;
+
 import android.support.v7.widget.ListPopupWindow;
 
 
@@ -118,9 +120,9 @@ public class HomepageFragment extends Fragment {
         linearManager.setOrientation(RecyclerView.HORIZONTAL);
         recyclerView.setLayoutManager(linearManager);
         HomepageRoomAdapter adapter = new HomepageRoomAdapter();
-        adapter.setOnClickListener(new HomepageRoomAdapter.OnItemClickListener<Integer>() {
+        adapter.setOnClickListener(new HomepageRoomAdapter.OnItemClickListener<RoomEntity>() {
             @Override
-            public void onItemClick(Integer itemValue, int viewID, int position) {
+            public void onItemClick(RoomEntity itemValue, int viewID, int position) {
 
             }
         });
