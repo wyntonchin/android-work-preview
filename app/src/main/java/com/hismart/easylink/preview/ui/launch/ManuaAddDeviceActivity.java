@@ -1,6 +1,5 @@
 package com.hismart.easylink.preview.ui.launch;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.hismart.easylink.preview.R;
@@ -17,7 +16,7 @@ public class ManuaAddDeviceActivity extends ToolbarBaseCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manua_add_device);
-        setLeftButtonBack(true);
+        setLeftButtonIsBack(true);
         setTitle("选择设备型号");
         hideToolbarLine();
     }

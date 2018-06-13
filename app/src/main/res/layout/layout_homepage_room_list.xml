@@ -6,6 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="68dp"
     android:layout_centerVertical="true"
+    android:layout_marginEnd="8dp"
+    android:layout_marginStart="8dp"
     app:cardBackgroundColor="@color/colorWhite"
     app:cardCornerRadius="6dp">
 
@@ -16,40 +18,61 @@
 
         <LinearLayout
             android:id="@+id/all_rooms_btn"
-            android:layout_width="68dp"
-            android:layout_height="68dp"
-            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:gravity="center">
+            android:layout_marginEnd="12dp"
+            android:layout_marginStart="12dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
             <ImageView
                 android:layout_width="36dp"
                 android:layout_height="36dp"
-                android:scaleType="center"
+                android:background="?selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true"
+                android:scaleType="centerCrop"
                 android:src="@drawable/homepage_select_all_rooms" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="全部"
-                android:textColor="@color/colorPrimary"
-                android:textSize="12sp"/>
+                android:textColor="@color/colorPrimary" />
         </LinearLayout>
 
         <View
-            android:layout_width="1px"
-            android:layout_height="20dp"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
             android:layout_centerVertical="true"
             android:layout_toEndOf="@+id/all_rooms_btn"
-            android:background="@drawable/shape_line_tab_top_shadow" />
+            android:background="@drawable/shape_line_tab_top_shadow"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp" />
 
-        <ImageButton
+        <ImageView
             android:id="@+id/room_setting"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:background="@color/colorWhite"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:background="?selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
+            android:scaleType="centerCrop"
             android:src="@drawable/homepage_select_all_rooms" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@+id/room_setting"
+            android:background="@drawable/shape_line_tab_top_shadow"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/room_list"
@@ -58,10 +81,10 @@
             android:layout_toEndOf="@+id/all_rooms_btn"
             android:layout_toStartOf="@+id/room_setting"
             android:orientation="horizontal"
+            android:overScrollMode="never"
             android:paddingEnd="1dp"
             android:paddingStart="1dp"
             android:scrollbars="none"
-            android:overScrollMode="never"
             app:layoutManager="android.support.v7.widget.LinearLayoutManager"
             tools:context=".ui.launch.MainActivity"
             tools:listitem="@layout/adapter_common_scene" />

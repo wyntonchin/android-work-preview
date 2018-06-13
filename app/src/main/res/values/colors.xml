@@ -10,6 +10,7 @@
     <color name="colorHomepagePrimaryDark">#FF868690</color>
     <color name="colorHomepagePrimary">#FFA6A6B0</color>
     <color name="colorHomepageAccent">#1FC9AC</color>
+    <color name="colorHomepageCardCover">#66A6A6B0</color>
 
     <color name="colorTab">#1FC9AC</color>
     <color name="colorTabText">#868690</color>

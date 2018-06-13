@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.hismart.easylink.preview.R;
+import com.hismart.easylink.preview.ui.StatusBarUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +24,7 @@ public class IntelligenceFragment extends Fragment {
     /**
      * mViewContent 缓存视图内容
      */
-    private View mViewContent;
+    private View mContentView;
 
     TabLayout tabLayout;
     ViewPager viewPager;
@@ -39,20 +40,25 @@ public class IntelligenceFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        if (mViewContent == null) {
-            mViewContent = inflater.inflate(R.layout.fragment_main_intelligence, container, false);
-            tabLayout = mViewContent.findViewById(R.id.tab_layout);
-            viewPager = mViewContent.findViewById(R.id.view_pager);
+        if (mContentView == null) {
+            mContentView = inflater.inflate(R.layout.fragment_main_intelligence, container, false);
+            if (getActivity() != null) {
+                //动态设置statusBar的高度，适配不同手机
+                View statusBar = mContentView.findViewById(R.id.fake_status_bar);
+                statusBar.getLayoutParams().height = StatusBarUtil.getStatusBarHeight(getActivity().getApplicationContext());
+            }
+            tabLayout = mContentView.findViewById(R.id.tab_layout);
+            viewPager = mContentView.findViewById(R.id.view_pager);
             //指定加载的页数，不回收数据
             viewPager.setOffscreenPageLimit(2);
             initTabLayout();
         }
         // 缓存View判断是否含有parent, 如果有需要从parent删除, 否则发生已有parent的错误.
-        ViewGroup parent = (ViewGroup) mViewContent.getParent();
+        ViewGroup parent = (ViewGroup) mContentView.getParent();
         if (parent != null) {
-            parent.removeView(mViewContent);
+            parent.removeView(mContentView);
         }
-        return mViewContent;
+        return mContentView;
     }
 
     private void initTabLayout() {

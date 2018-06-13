@@ -128,11 +128,10 @@
         </LinearLayout>
     </LinearLayout>
 
-    <View
+<!--    <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="18dp"
-        android:background="@drawable/shape_line_tab_top_shadow" />
-
-
+        android:background="@drawable/shape_line_tab_top_shadow"
+        android:visibility="gone"/>-->
 </RelativeLayout>

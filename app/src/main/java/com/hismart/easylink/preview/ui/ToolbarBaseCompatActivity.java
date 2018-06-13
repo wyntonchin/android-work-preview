@@ -31,17 +31,19 @@ public abstract class ToolbarBaseCompatActivity extends BaseCompatActivity {
     public Toolbar mToolbar = null;
     public LinearLayout rootView = null;
     private TextView titleText;
+    private TextView rightText;
     private boolean isBack = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         super.setContentView(R.layout.base_activity_toolbar);
-        
-        rootView =  findViewById(R.id.toolbar_root_view);
+
+        rootView = findViewById(R.id.toolbar_root_view);
         titleText = findViewById(R.id.toolbar_title);
+        rightText = findViewById(R.id.toolbar_right_text);
         //setStatusBarColor(R.color.colorPrimary);
-		initToolbar();
+        initToolbar();
         menuItemDataHashMap = new HashMap<Integer, MenuItemData>();
     }
 
@@ -306,7 +308,7 @@ public abstract class ToolbarBaseCompatActivity extends BaseCompatActivity {
      *
      * @param isBack 是否显示
      */
-    protected void setLeftButtonBack(boolean isBack) {
+    protected void setLeftButtonIsBack(boolean isBack) {
         this.isBack = isBack;
         if (mToolbar != null) {
             if (isBack) {
@@ -322,13 +324,42 @@ public abstract class ToolbarBaseCompatActivity extends BaseCompatActivity {
      *
      * @param res
      */
-    protected void setLeftButtonBack(int res) {
+    protected void setLeftButtonBackResId(int res) {
         isBack = false;
         if (mToolbar != null) {
             mToolbar.setNavigationIcon(res);
         }
     }
 
+    protected void setRightTextView(int resId) {
+        if (rightText != null) {
+            rightText.setText(resId);
+        }
+    }
+
+    protected void setRightTextView(CharSequence text) {
+        if (rightText != null) {
+            rightText.setText(text);
+        }
+    }
+
+    protected void setRightTextViewOnClickLisenter(final RightTextClickListener textClickListener) {
+        if (rightText == null) {
+            return;
+        }
+        if (textClickListener != null) {
+            rightText.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    textClickListener.onClick();
+                }
+            });
+        }
+    }
+
+    public interface RightTextClickListener {
+        void onClick();
+    }
 
     /**
      * 添加右侧按钮
@@ -446,7 +477,7 @@ public abstract class ToolbarBaseCompatActivity extends BaseCompatActivity {
     /**
      * 获取菜单列表
      *
-     * @return HashMap<Integer       ,               MenuItemData> MenuList
+     * @return HashMap<Integer               ,                               MenuItemData> MenuList
      */
     protected HashMap<Integer, MenuItemData> getMenuList() {
         return menuItemDataHashMap;

@@ -16,12 +16,12 @@ import com.hismart.easylink.preview.ui.StatusBarUtil;
  * description LaunchActivity作为主界面的容器
  */
 public class MainActivity extends BaseCompatActivity implements View.OnClickListener {
-    private FragmentTabHost mTabHost = null;
     /**
      * 声明全局tab list数组，减少重复代码
      */
     private static final Integer[] TAB_IDS = {R.id.tab_homepage, R.id.tab_intelligence, R.id.tab_mall, R.id.tab_mine};
-    View[] mUnderTabs = new View[4];
+    private FragmentTabHost mTabHost = null;
+    //View[] underTabs = new View[4];
     View[] mOnTabs =  new View[4];
 
     @Override
@@ -40,10 +40,11 @@ public class MainActivity extends BaseCompatActivity implements View.OnClickList
                 android.R.id.tabcontent);
         LayoutInflater inflate = LayoutInflater.from(this);
         Class<?>[] fragments = new Class[]{HomepageFragment.class, IntelligenceFragment.class, MallFragment.class, MimeFragment.class};
+        View[]  underTabs = new View[4];
         for (int i = 0; i < fragments.length; i++) {
-            mUnderTabs[i] = inflate.inflate(R.layout.homepage_fake_tabs_item, null);
+            underTabs[i] = inflate.inflate(R.layout.layout_main_fake_tabs_item, null);
             mOnTabs[i] = findViewById(TAB_IDS[i]);
-            mTabHost.addTab(mTabHost.newTabSpec("tab" + i).setIndicator(mUnderTabs[i]), fragments[i], null);
+            mTabHost.addTab(mTabHost.newTabSpec("tab" + i).setIndicator(underTabs[i]), fragments[i], null);
         }
         switchTab(R.id.tab_homepage);
         mTabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
