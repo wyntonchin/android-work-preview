@@ -5,6 +5,8 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.VibrationEffect;
@@ -302,6 +304,10 @@ public class HomepageFragment extends Fragment {
         popupWindow.setOutsideTouchable(true);
         //设置popup拦截touch事件，否则弹出时点击按钮区域，事件依然会传递到按钮
         popupWindow.setFocusable(true);
+        if(Build.VERSION.SDK_INT <= Build.VERSION_CODES.M){
+            //4.0-5.0设置此方法才能拦截点击事件
+            popupWindow.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.colorWhite)));
+        }
 
         View manualAddView = popupView.findViewById(R.id.manual_add);
         manualAddView.setOnClickListener(new View.OnClickListener() {
@@ -323,6 +329,7 @@ public class HomepageFragment extends Fragment {
 
             }
         });
+       //popupWindow.set
         popupWindow.showAsDropDown(anchor, 0, 28);
     }
 

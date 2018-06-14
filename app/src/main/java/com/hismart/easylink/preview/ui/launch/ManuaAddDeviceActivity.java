@@ -18,6 +18,5 @@ public class ManuaAddDeviceActivity extends ToolbarBaseCompatActivity {
         setContentView(R.layout.activity_manua_add_device);
         setLeftButtonIsBack(true);
         setTitle("选择设备型号");
-        hideToolbarLine();
     }
 }

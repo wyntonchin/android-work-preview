@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebChromeClient;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
@@ -46,7 +47,6 @@ public class MallFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
 
     private View mContentView;
-    private WebView mWebView;
 
     public MallFragment() {
         // Required empty public constructor
@@ -85,7 +85,7 @@ public class MallFragment extends Fragment {
 
         if (mContentView == null) {
             mContentView = inflater.inflate(R.layout.fragment_main_mall, container, false);
-            //initWebView(mContentView);
+            initWebView(mContentView);
         }
         // 缓存View判断是否含有parent, 如果有需要从parent删除, 否则发生已有parent的错误.
         ViewGroup parent = (ViewGroup) mContentView.getParent();
@@ -97,50 +97,83 @@ public class MallFragment extends Fragment {
     }
 
     private void initWebView(View contentView) {
-        mWebView = contentView.findViewById(R.id.web_view);
+        WebView webView = contentView.findViewById(R.id.web_view);
         //WebView加载web资源
+        WebSettings webSettings = webView.getSettings();
 
-        mWebView.setWebViewClient(new WebViewClient() {
-            // Load opened URL in the application instead of standard browser
-           @Override
-            @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-                Log.d("TAG","WebResourceRequest ="+request);
-                view.loadUrl(request.getUrl().toString());
-                //返回值是true的时候控制去WebView打开，为false调用系统浏览器或第三方浏览器
-                return true;
-            }
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                Log.d("TAG","String url ="+url);
-                view.loadUrl(url.toString());
-                return true;
-            }
+// 支持javascript
+        webSettings.setJavaScriptEnabled(true);
 
+// 支持使用localStorage(H5页面的支持)
+        webSettings.setDomStorageEnabled(true);
+
+// 支持数据库
+        webSettings.setDatabaseEnabled(true);
+
+// 支持缓存
+        webSettings.setAppCacheEnabled(true);
+        String appCaceDir = MallFragment.this.getActivity().getApplicationContext().getDir("cache", Context.MODE_PRIVATE).getPath();
+        webSettings.setAppCachePath(appCaceDir);
+
+// 设置可以支持缩放
+        webSettings.setUseWideViewPort(true);
+
+// 扩大比例的缩放
+        webSettings.setSupportZoom(true);
+
+        webSettings.setBuiltInZoomControls(true);
+
+// 隐藏缩放按钮
+        webSettings.setDisplayZoomControls(false);
+
+// 自适应屏幕
+        webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+        webSettings.setLoadWithOverviewMode(true);
+
+// 隐藏滚动条
+        webView.setHorizontalScrollBarEnabled(false);
+        webView.setVerticalScrollBarEnabled(false);
+
+// 进度显示及隐藏
+        webView.setWebChromeClient(new WebChromeClient() {
             @Override
-            public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
-                super.onReceivedError(view, request, error);
+            public void onProgressChanged(WebView view, int newProgress) {
+/*                if (newProgress >= 99) {
+                    pv.setVisibility(View.INVISIBLE);
+                } else {
+                    pv.setVisibility(View.VISIBLE);
+                }*/
             }
         });
 
-        WebSettings webSettings = mWebView.getSettings();//获得WebView的设置
-        webSettings.setUseWideViewPort(true);// 设置此属性，可任意比例缩放
-        webSettings.setLoadWithOverviewMode(true);//适配
-        webSettings.setCacheMode(WebSettings.LOAD_DEFAULT);  //设置 缓存模式
-        webSettings.setDomStorageEnabled(true);// 开启 DOM storage API 功能
-        webSettings.setDatabaseEnabled(true);//开启 database storage API 功能
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
-        webSettings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);//HTTPS，注意这个是在LOLLIPOP以上才调用的
-        webSettings.setBlockNetworkImage(true);//关闭加载网络图片，在一开始加载的时候可以设置为true，当加载完网页的时候再设置为false
-        webSettings.setJavaScriptCanOpenWindowsAutomatically(true);//设置js可以直接打开窗口，如window.open()，默认为false
-        webSettings.setJavaScriptEnabled(true);//是否允许执行js，默认为false。设置true时，会提醒可能造成XSS漏洞
-        webSettings.setSupportZoom(true);//是否可以缩放，默认true
-        webSettings.setBuiltInZoomControls(true);//是否显示缩放按钮，默认false
-        webSettings.setUseWideViewPort(true);//设置此属性，可任意比例缩放。大视图模式
-        webSettings.setLoadWithOverviewMode(true);//和setUseWideViewPort(true)一起解决网页自适应问题
-        webSettings.setAppCacheEnabled(true);//是否使用缓存
-        webSettings.setDomStorageEnabled(true);//DOM Storage
-        webSettings.setAppCacheMaxSize(5 * 1048576);
+// 处理网页内的连接（自身打开）
+        webView.setWebViewClient(new WebViewClient() {
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+
+                if(url.contains("http")||url.contains("https")){
+                    // 返回值是true的时候控制去WebView打开，为false调用系统浏览器或第三方浏览器
+                    view.loadUrl(url);
+                    return true;
+                }
+
+                return true;
+            }
+
+            @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+
+                if(request.getUrl().toString().contains("http")||request.getUrl().toString().contains("https")){
+                    // 返回值是true的时候控制去WebView打开，为false调用系统浏览器或第三方浏览器
+                    view.loadUrl(request.getUrl().toString());
+                    return true;
+                }
+                return true;
+            }
+        });
+
+        webView.loadUrl("https://m.hisense.com");
     }
 
 
@@ -149,6 +182,12 @@ public class MallFragment extends Fragment {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mContentView = null;
     }
 
     @Override

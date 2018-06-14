@@ -30,7 +30,7 @@
             android:theme="@style/AppTheme.Transparent" />
         <activity android:name=".ui.launch.ManuaAddDeviceActivity" />
         <activity android:name=".ui.launch.ManageRoomActivity" />
-        <activity android:name=".ui.launch.ManageRoomAddActivity"></activity>
+        <activity android:name=".ui.launch.ManageRoomAddActivity"/>
     </application>
 
 </manifest>

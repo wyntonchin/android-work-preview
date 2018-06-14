@@ -29,7 +29,7 @@ public abstract class ToolbarBaseCompatActivity extends BaseCompatActivity {
     private static final String TAG = ToolbarBaseCompatActivity.class.getSimpleName();
     HashMap<Integer, MenuItemData> menuItemDataHashMap = null;
     public Toolbar mToolbar = null;
-    public LinearLayout rootView = null;
+    public LinearLayout baseView = null;
     private TextView titleText;
     private TextView rightText;
     private boolean isBack = false;
@@ -39,9 +39,9 @@ public abstract class ToolbarBaseCompatActivity extends BaseCompatActivity {
         super.onCreate(savedInstanceState);
         super.setContentView(R.layout.base_activity_toolbar);
 
-        rootView = findViewById(R.id.toolbar_root_view);
         titleText = findViewById(R.id.toolbar_title);
         rightText = findViewById(R.id.toolbar_right_text);
+        baseView = findViewById(R.id.base_content_view);
         //setStatusBarColor(R.color.colorPrimary);
         initToolbar();
         menuItemDataHashMap = new HashMap<Integer, MenuItemData>();
@@ -54,10 +54,10 @@ public abstract class ToolbarBaseCompatActivity extends BaseCompatActivity {
 
     @Override
     public void setContentView(View view) {
-        if (rootView == null) {
+        if (baseView == null) {
             return;
         }
-        rootView.addView(view, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        baseView.addView(view, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
     }
 
     /*********************************************************************************************************************************
@@ -187,16 +187,6 @@ public abstract class ToolbarBaseCompatActivity extends BaseCompatActivity {
     }
 
     /**
-     * 隐藏toolbar的阴影
-     */
-    protected void hideToolbarLine() {
-        LinearLayout barLine = findViewById(R.id.actionbar_line);
-        if (barLine != null) {
-            barLine.setVisibility(View.GONE);
-        }
-    }
-
-    /**
      * 设置Toolbar标题
      *
      * @param title 标题
@@ -249,7 +239,7 @@ public abstract class ToolbarBaseCompatActivity extends BaseCompatActivity {
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.MATCH_PARENT);
-        rootView.addView(contentView, lp);
+        baseView.addView(contentView, lp);
         return contentView;
     }
 
@@ -258,7 +248,7 @@ public abstract class ToolbarBaseCompatActivity extends BaseCompatActivity {
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.MATCH_PARENT);
-        rootView.addView(view, lp);
+        baseView.addView(view, lp);
         return view;
     }
 

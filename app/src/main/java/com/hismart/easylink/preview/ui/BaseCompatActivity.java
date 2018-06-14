@@ -52,7 +52,7 @@ public abstract class BaseCompatActivity extends AppCompatActivity {
         if (isRegisterEventBus()) {
             EventBus.getDefault().register(this);
         }
-        ActivityStack.getInstance().addActivity(this);
+        //ActivityStack.getInstance().addActivity(this);
     }
 
     @Override
@@ -87,7 +87,7 @@ public abstract class BaseCompatActivity extends AppCompatActivity {
         }
         isDestroy = true;
         isActive = false;
-        ActivityStack.getInstance().finishActivity();
+        //ActivityStack.getInstance().finishActivity();
     }
 
     @Override

@@ -133,4 +133,11 @@ public class IntelligenceFragment extends Fragment {
             return super.getItemPosition(object);
         }
     }
+
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mContentView = null;
+    }
 }
