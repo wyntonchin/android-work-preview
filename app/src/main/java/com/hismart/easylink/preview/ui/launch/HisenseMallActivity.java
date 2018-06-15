@@ -5,18 +5,18 @@ import android.os.Bundle;
 import com.hismart.easylink.preview.R;
 import com.hismart.easylink.preview.ui.BaseToolbarCompatActivity;
 
-/**
- * @author qinwendong.
- * @date 2018/5/30
- * description ManuaAddDeviceActivity手动添加设备界面
- */
-public class ManuaAddDeviceActivity extends BaseToolbarCompatActivity {
+public class HisenseMallActivity extends BaseToolbarCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_manua_add_device);
+        setContentView(R.layout.activity_hisense_mall);
         setLeftButtonIsBack(true);
-        setMiddleTitle("选择设备型号");
+        setLeftTitle("关闭");
+        //setMiddleTitle("关闭");
+    }
+    @Override
+    protected void pressBackKeyEvent() {
+        //TODO
     }
 }

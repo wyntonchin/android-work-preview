@@ -1,5 +1,6 @@
 package com.hismart.easylink.preview.ui.launch;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTabHost;
 import android.view.LayoutInflater;
@@ -69,6 +70,10 @@ public class MainActivity extends BaseCompatActivity implements View.OnClickList
             return;
         }
         mTabHost.setCurrentTab(index);
+        if(tabResId == R.id.tab_mall){
+            Intent intent = new Intent(MainActivity.this, HisenseMallActivity.class);
+            startActivity(intent);
+        }
         for (int i = 0; i < mOnTabs.length; i++) {
             if (i == index) {
                 //让自定义的selector颜色生效

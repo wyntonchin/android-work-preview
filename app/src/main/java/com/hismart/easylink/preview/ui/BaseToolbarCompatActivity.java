@@ -25,12 +25,13 @@ import java.util.Map;
  * @date 2018/5/30
  * description Activity基类
  */
-public abstract class ToolbarBaseCompatActivity extends BaseCompatActivity {
-    private static final String TAG = ToolbarBaseCompatActivity.class.getSimpleName();
+public abstract class BaseToolbarCompatActivity extends BaseCompatActivity {
+    private static final String TAG = BaseToolbarCompatActivity.class.getSimpleName();
     HashMap<Integer, MenuItemData> menuItemDataHashMap = null;
     public Toolbar mToolbar = null;
     public LinearLayout baseView = null;
-    private TextView titleText;
+    private TextView leftTitle;
+    private TextView middleTitle;
     private TextView rightText;
     private boolean isBack = false;
 
@@ -38,8 +39,8 @@ public abstract class ToolbarBaseCompatActivity extends BaseCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         super.setContentView(R.layout.base_activity_toolbar);
-
-        titleText = findViewById(R.id.toolbar_title);
+        leftTitle = findViewById(R.id.toolbar_left_title);
+        middleTitle = findViewById(R.id.toolbar_middle_title);
         rightText = findViewById(R.id.toolbar_right_text);
         baseView = findViewById(R.id.base_content_view);
         //setStatusBarColor(R.color.colorPrimary);
@@ -83,6 +84,7 @@ public abstract class ToolbarBaseCompatActivity extends BaseCompatActivity {
                 }
             }
         });
+        //setSupportActionBar(mToolbar);
     }
 
     /**
@@ -191,44 +193,31 @@ public abstract class ToolbarBaseCompatActivity extends BaseCompatActivity {
      *
      * @param title 标题
      */
-    @Override
-    public void setTitle(CharSequence title) {
-        super.setTitle(title);
-        if (titleText != null) {
-            titleText.setText(title);
+    protected void setLeftTitle(CharSequence title) {
+        if (leftTitle != null) {
+            leftTitle.setText(title);
         }
     }
-
+    protected void setLeftTitle(int titleId) {
+        if (leftTitle != null) {
+            leftTitle.setText(titleId);
+        }
+    }
     /**
      * 设置Toolbar标题
      *
-     * @param titleId 标题Res
-     */
-    @Override
-    public void setTitle(int titleId) {
-        super.setTitle(titleId);
-        setTitle(getString(titleId));
-    }
-
-    /**
-     * 设置Toolbar子标题
-     *
      * @param title 标题
      */
-    public void setSubTitle(CharSequence title) {
-        if (mToolbar != null) {
-            mToolbar.setSubtitle(title);
+    protected void setMiddleTitle(CharSequence title) {
+        //super.setTitle(title);
+        if (middleTitle != null) {
+            middleTitle.setText(title);
         }
     }
-
-    /**
-     * 设置Toolbar子标题
-     *
-     * @param titleId 标题Res
-     */
-    public void setSubTitle(int titleId) {
-        if (mToolbar != null) {
-            mToolbar.setSubtitle(titleId);
+    protected void setMiddleTitle(int titleId) {
+        //super.setTitle(title);
+        if (middleTitle != null) {
+            middleTitle.setText(titleId);
         }
     }
 

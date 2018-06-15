@@ -9,11 +9,22 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/tool_bar"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        android:layout_height="?attr/actionBarSize">
+        <TextView
+            android:id="@+id/toolbar_left_title"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical|start"
+            android:layout_marginStart="16dp"
+            android:gravity="center_vertical"
+            android:background="?selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
+            android:textColor="@color/colorWhite"
+            android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/toolbar_title"
+            android:id="@+id/toolbar_middle_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -36,8 +47,8 @@
 
     <LinearLayout
         android:id="@+id/base_content_view"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:background="@android:color/white"
         android:orientation="vertical" />
 
