@@ -105,7 +105,7 @@ public class MainActivity extends BaseCompatActivity implements View.OnClickList
                 break;
         }
     }
-
+/*
     @Override
     public void onBackPressed() {
         //返回键控制网页返回
@@ -116,5 +116,5 @@ public class MainActivity extends BaseCompatActivity implements View.OnClickList
         }else{
             super.onBackPressed();
         }
-    }
+    }*/
 }

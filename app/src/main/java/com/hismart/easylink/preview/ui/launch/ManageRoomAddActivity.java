@@ -13,8 +13,8 @@ public class ManageRoomAddActivity extends BaseToolbarCompatActivity {
         setContentView(R.layout.activity_manage_room_add);
         setLeftButtonIsBack(true);
         setMiddleTitle("添加房间");
-        setRightTextView("保存");
-        setRightTextViewOnClickLisenter(new BaseToolbarCompatActivity.RightTextClickListener() {
+        setRightText("保存");
+        setRightTextOnClickListener(new ToolBarTextClickListener() {
             @Override
             public void onClick() {
 

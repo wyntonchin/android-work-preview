@@ -85,7 +85,7 @@ public class MallFragment extends Fragment {
 
         if (mContentView == null) {
             mContentView = inflater.inflate(R.layout.fragment_main_mall, container, false);
-            initWebView(mContentView);
+            //initWebView(mContentView);
         }
         // 缓存View判断是否含有parent, 如果有需要从parent删除, 否则发生已有parent的错误.
         ViewGroup parent = (ViewGroup) mContentView.getParent();

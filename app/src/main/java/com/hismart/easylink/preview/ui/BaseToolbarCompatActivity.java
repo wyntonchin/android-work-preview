@@ -2,6 +2,7 @@ package com.hismart.easylink.preview.ui;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.ColorRes;
 import android.support.v4.view.ActionProvider;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.Toolbar;
@@ -30,7 +31,7 @@ public abstract class BaseToolbarCompatActivity extends BaseCompatActivity {
     HashMap<Integer, MenuItemData> menuItemDataHashMap = null;
     public Toolbar mToolbar = null;
     public LinearLayout baseView = null;
-    private TextView leftTitle;
+    private TextView leftText;
     private TextView middleTitle;
     private TextView rightText;
     private boolean isBack = false;
@@ -39,7 +40,7 @@ public abstract class BaseToolbarCompatActivity extends BaseCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         super.setContentView(R.layout.base_activity_toolbar);
-        leftTitle = findViewById(R.id.toolbar_left_title);
+        leftText = findViewById(R.id.toolbar_left_title);
         middleTitle = findViewById(R.id.toolbar_middle_title);
         rightText = findViewById(R.id.toolbar_right_text);
         baseView = findViewById(R.id.base_content_view);
@@ -72,13 +73,13 @@ public abstract class BaseToolbarCompatActivity extends BaseCompatActivity {
         mToolbar = findViewById(R.id.tool_bar);
         mToolbar.setPopupTheme(R.style.Base_ThemeOverlay_AppCompat_Light);
         mToolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
-        mToolbar.setSubtitleTextColor(getResources().getColor(android.R.color.white));
+        //mToolbar.setSubtitleTextColor(getResources().getColor(android.R.color.white));
         mToolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (isBack) {
-                    pressBackKeyEvent();
+                    pressToolbarNavigation();
                 } else {
 
                 }
@@ -90,15 +91,15 @@ public abstract class BaseToolbarCompatActivity extends BaseCompatActivity {
     /**
      * 设置状态栏颜色
      *
-     * @param color Res
+     * @param id Res
      */
-    protected void setStatusBarColor(int color) {
+    protected void setStatusBarColor(@ColorRes int id) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             // finally change the color
-            window.setStatusBarColor(getResources().getColor(color));
+            window.setStatusBarColor(getResources().getColor(id));
         } else {
         }
     }
@@ -106,7 +107,7 @@ public abstract class BaseToolbarCompatActivity extends BaseCompatActivity {
     /**
      * 返回按钮事件
      */
-    protected void pressBackKeyEvent() {
+    protected void pressToolbarNavigation() {
         finish();
     }
 
@@ -189,25 +190,63 @@ public abstract class BaseToolbarCompatActivity extends BaseCompatActivity {
     }
 
     /**
-     * 设置Toolbar标题
+     * 是否显示默认左上角返回按钮
      *
-     * @param title 标题
+     * @param isBack 是否显示
      */
-    protected void setLeftTitle(CharSequence title) {
-        if (leftTitle != null) {
-            leftTitle.setText(title);
+    protected void setLeftButtonIsBack(boolean isBack) {
+        this.isBack = isBack;
+        if (mToolbar != null) {
+            if (isBack) {
+                mToolbar.setNavigationIcon(R.drawable.base_btn_back);
+            } else {
+                mToolbar.setNavigationIcon(null);
+            }
         }
     }
-    protected void setLeftTitle(int titleId) {
-        if (leftTitle != null) {
-            leftTitle.setText(titleId);
+
+    /**
+     * 设置左上返回键图标
+     *
+     * @param res
+     */
+    protected void setLeftButtonBackResId(int res) {
+        isBack = false;
+        if (mToolbar != null) {
+            mToolbar.setNavigationIcon(res);
         }
     }
+
     /**
      * 设置Toolbar标题
      *
      * @param title 标题
      */
+    protected void setLeftText(CharSequence title) {
+        if (leftText != null) {
+            leftText.setText(title);
+        }
+    }
+    protected void setLeftText(int titleId) {
+        if (leftText != null) {
+            leftText.setText(titleId);
+        }
+    }
+
+    protected void setLeftTextOnClickLisenter(final ToolBarTextClickListener textClickListener) {
+        if (leftText == null) {
+            return;
+        }
+        if (textClickListener != null) {
+            leftText.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    textClickListener.onClick();
+                }
+            });
+        }
+    }
+
     protected void setMiddleTitle(CharSequence title) {
         //super.setTitle(title);
         if (middleTitle != null) {
@@ -220,6 +259,37 @@ public abstract class BaseToolbarCompatActivity extends BaseCompatActivity {
             middleTitle.setText(titleId);
         }
     }
+
+    protected void setRightText(int resId) {
+        if (rightText != null) {
+            rightText.setText(resId);
+        }
+    }
+
+    protected void setRightText(CharSequence text) {
+        if (rightText != null) {
+            rightText.setText(text);
+        }
+    }
+
+    protected void setRightTextOnClickListener(final ToolBarTextClickListener textClickListener) {
+        if (rightText == null) {
+            return;
+        }
+        if (textClickListener != null) {
+            rightText.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    textClickListener.onClick();
+                }
+            });
+        }
+    }
+
+    public interface ToolBarTextClickListener {
+        void onClick();
+    }
+
 
     protected View setSubContentView(int viewId) {
         //add subview
@@ -275,69 +345,11 @@ public abstract class BaseToolbarCompatActivity extends BaseCompatActivity {
         // Handle presses on the action bar items
         switch (item.getItemId()) {
             case android.R.id.home:
-                pressBackKeyEvent();
+                pressToolbarNavigation();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
-    }
-
-    /**
-     * 是否显示默认左上角返回按钮
-     *
-     * @param isBack 是否显示
-     */
-    protected void setLeftButtonIsBack(boolean isBack) {
-        this.isBack = isBack;
-        if (mToolbar != null) {
-            if (isBack) {
-                mToolbar.setNavigationIcon(R.drawable.base_btn_back);
-            } else {
-                mToolbar.setNavigationIcon(null);
-            }
-        }
-    }
-
-    /**
-     * 设置左上返回键图标
-     *
-     * @param res
-     */
-    protected void setLeftButtonBackResId(int res) {
-        isBack = false;
-        if (mToolbar != null) {
-            mToolbar.setNavigationIcon(res);
-        }
-    }
-
-    protected void setRightTextView(int resId) {
-        if (rightText != null) {
-            rightText.setText(resId);
-        }
-    }
-
-    protected void setRightTextView(CharSequence text) {
-        if (rightText != null) {
-            rightText.setText(text);
-        }
-    }
-
-    protected void setRightTextViewOnClickLisenter(final RightTextClickListener textClickListener) {
-        if (rightText == null) {
-            return;
-        }
-        if (textClickListener != null) {
-            rightText.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    textClickListener.onClick();
-                }
-            });
-        }
-    }
-
-    public interface RightTextClickListener {
-        void onClick();
     }
 
     /**

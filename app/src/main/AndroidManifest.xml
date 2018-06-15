@@ -18,6 +18,7 @@
         <activity
             android:name=".ui.launch.MainActivity"
             android:configChanges=""
+            android:launchMode="singleTask"
             android:theme="@style/AppTheme.TranslucentStatus">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,7 +32,7 @@
         <activity android:name=".ui.launch.ManuaAddDeviceActivity" />
         <activity android:name=".ui.launch.ManageRoomActivity" />
         <activity android:name=".ui.launch.ManageRoomAddActivity" />
-        <activity android:name=".ui.launch.HisenseMallActivity"></activity>
+        <activity android:name=".ui.launch.HisenseMallActivity" />
     </application>
 
 </manifest>
