@@ -104,8 +104,9 @@
                     android:nestedScrollingEnabled="false"
                     android:scrollbars="none"
                     app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                    app:spanCount="2"
                     tools:context=".ui.launch.CommonSceneFragment"
-                    tools:listitem="@layout/adapter_common_scene" />
+                    tools:listitem="@layout/adapter_homepage_device" />
 
             </LinearLayout>
         </android.support.v4.widget.NestedScrollView>

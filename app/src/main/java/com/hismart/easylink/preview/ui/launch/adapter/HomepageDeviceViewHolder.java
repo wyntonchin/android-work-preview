@@ -21,7 +21,7 @@ public class HomepageDeviceViewHolder extends BaseViewHolder<DeviceEntity> {
     ImageView mRoomImg;
 
     HomepageDeviceViewHolder(Context context, ViewGroup root) {
-        super(context, root, R.layout.homepage_device_grid_item);
+        super(context, root, R.layout.adapter_homepage_device);
 /*        mRoomTv = itemView.findViewById(R.id.room_name);
         mRoomImg = itemView.findViewById(R.id.room_img);*/
     }

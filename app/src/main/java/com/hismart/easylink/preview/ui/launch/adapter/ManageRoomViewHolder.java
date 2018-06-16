@@ -1,6 +1,11 @@
 package com.hismart.easylink.preview.ui.launch.adapter;
 
 import android.content.Context;
+import android.util.Log;
+import android.view.ContextMenu;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -14,15 +19,10 @@ import com.hismart.easylink.preview.ui.launch.entity.RoomEntity;
  * @date 2018/6/2
  * description SampleViewHolder
  */
-public class HomepageRoomViewHolder extends BaseViewHolder<RoomEntity> {
+public class ManageRoomViewHolder extends BaseViewHolder<RoomEntity> {
 
-    TextView mRoomTv;
-    ImageView mRoomImg;
-
-    HomepageRoomViewHolder(Context context, ViewGroup root) {
-        super(context, root, R.layout.adapter_homepage_room);
-        mRoomTv = itemView.findViewById(R.id.room_name);
-        mRoomImg = itemView.findViewById(R.id.room_img);
+    ManageRoomViewHolder(Context context, ViewGroup root) {
+        super(context, root, R.layout.adapter_manage_room);
     }
 
     @Override
@@ -30,7 +30,7 @@ public class HomepageRoomViewHolder extends BaseViewHolder<RoomEntity> {
         if (itemValue != null) {
             //mRoomTv.setText(itemValue);
         }
-        itemView.setOnClickListener(new View.OnClickListener() {
+/*        itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (listener == null) {
@@ -38,6 +38,6 @@ public class HomepageRoomViewHolder extends BaseViewHolder<RoomEntity> {
                 }
                 listener.onItemClick(itemValue, v.getId(), position);
             }
-        });
+        });*/
     }
 }

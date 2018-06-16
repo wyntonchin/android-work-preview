@@ -6,4 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".ui.launch.ManageRoomActivity">
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/room_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingEnd="4dp"
+        android:paddingStart="4dp"
+        android:paddingTop="2dp"
+        android:scrollbars="none"
+        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+        tools:context=".ui.launch.ManageRoomActivity"
+        tools:listitem="@layout/adapter_manage_room" />
 </android.support.constraint.ConstraintLayout>

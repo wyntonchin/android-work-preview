@@ -23,7 +23,7 @@ public class MainActivity extends BaseCompatActivity implements View.OnClickList
     private static final Integer[] TAB_IDS = {R.id.tab_homepage, R.id.tab_intelligence, R.id.tab_mall, R.id.tab_mine};
     private FragmentTabHost mTabHost = null;
     //View[] underTabs = new View[4];
-    View[] mOnTabs =  new View[4];
+    View[] mOnTabs = new View[4];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +41,7 @@ public class MainActivity extends BaseCompatActivity implements View.OnClickList
                 android.R.id.tabcontent);
         LayoutInflater inflate = LayoutInflater.from(this);
         Class<?>[] fragments = new Class[]{HomepageFragment.class, IntelligenceFragment.class, MallFragment.class, MimeFragment.class};
-        View[]  underTabs = new View[4];
+        View[] underTabs = new View[4];
         for (int i = 0; i < fragments.length; i++) {
             underTabs[i] = inflate.inflate(R.layout.layout_main_fake_tabs_item, null);
             mOnTabs[i] = findViewById(TAB_IDS[i]);
@@ -70,7 +70,7 @@ public class MainActivity extends BaseCompatActivity implements View.OnClickList
             return;
         }
         mTabHost.setCurrentTab(index);
-        if(tabResId == R.id.tab_mall){
+        if (tabResId == R.id.tab_mall) {
             Intent intent = new Intent(MainActivity.this, HisenseMallActivity.class);
             startActivity(intent);
         }
@@ -78,7 +78,7 @@ public class MainActivity extends BaseCompatActivity implements View.OnClickList
             if (i == index) {
                 //让自定义的selector颜色生效
                 mOnTabs[i].setSelected(true);
-            } else if ( mOnTabs[i].isSelected()) {
+            } else if (mOnTabs[i].isSelected()) {
                 mOnTabs[i].setSelected(false);
             }
         }
@@ -100,21 +100,27 @@ public class MainActivity extends BaseCompatActivity implements View.OnClickList
                 }
                 startVoiceInterface();*/
                 break;
+            case R.id.tab_mall:
+                Intent intent = new Intent(MainActivity.this.getApplicationContext(), HisenseMallActivity.class);
+                startActivity(intent);
+                switchTab(R.id.tab_homepage);
+                break;
             default:
                 switchTab(v.getId());
                 break;
         }
     }
-/*
+
     @Override
     public void onBackPressed() {
         //返回键控制网页返回
-        if(mTabHost.getCurrentTab() == 2){
+/*        if(mTabHost.getCurrentTab() == 2){
             //TODO web back
             //doWebBack();
             return;
         }else{
             super.onBackPressed();
-        }
-    }*/
+        }*/
+        moveTaskToBack(false);
+    }
 }

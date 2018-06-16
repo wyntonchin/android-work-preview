@@ -5,12 +5,12 @@ import android.os.Bundle;
 import com.hismart.easylink.preview.R;
 import com.hismart.easylink.preview.ui.BaseToolbarCompatActivity;
 
-public class ManageRoomAddActivity extends BaseToolbarCompatActivity {
+public class ManageAddRoomActivity extends BaseToolbarCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_manage_room_add);
+        setContentView(R.layout.activity_manage_add_room);
         setLeftButtonIsBack(true);
         setMiddleTitle("添加房间");
         setRightText("保存");
