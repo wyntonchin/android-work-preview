@@ -11,13 +11,13 @@ import com.squareup.leakcanary.RefWatcher;
  * @date 2018/5/30
  * description 描述 Utils初始化类
  */
-public class Utils {
+public class RefWatcherUtils {
     //ApplicationContext
     private static Application context;
     //LeakCanary 监听对象
     private static RefWatcher refWatcher;
 
-    private Utils() {
+    private RefWatcherUtils() {
         throw new UnsupportedOperationException("u can't instantiate me...");
     }
 
@@ -28,15 +28,15 @@ public class Utils {
      */
     public static void init(Context context) {
         //获取ApplicationContext
-        Utils.context = (Application) context.getApplicationContext();
+        RefWatcherUtils.context = (Application) context.getApplicationContext();
 
         //LeakCanary 初始化（内存泄漏检测）
-        if (LeakCanary.isInAnalyzerProcess(Utils.context)) {
+        if (LeakCanary.isInAnalyzerProcess(RefWatcherUtils.context)) {
             // This process is dedicated to LeakCanary for heap analysis.
             // You should not init your app in this process.
             return;
         }
-        refWatcher = LeakCanary.install(Utils.context);
+        refWatcher = LeakCanary.install(RefWatcherUtils.context);
     }
 
     /**

@@ -5,7 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
 import com.hismart.easylink.preview.eventbus.Event;
-import com.hismart.easylink.preview.util.Utils;
+import com.hismart.easylink.preview.util.RefWatcherUtils;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -32,7 +32,7 @@ public abstract class BaseFragment extends Fragment {
             EventBus.getDefault().unregister(this);
         }
         //添加内存泄漏监控
-        Utils.getRefWatcher().watch(this);
+        RefWatcherUtils.getRefWatcher().watch(this);
     }
 
     /**

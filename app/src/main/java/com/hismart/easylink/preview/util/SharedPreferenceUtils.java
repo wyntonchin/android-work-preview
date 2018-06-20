@@ -36,7 +36,7 @@ public class SharedPreferenceUtils {
      * @param name Desired preferences file.
      */
     public static void init(String name) {
-        mSharePrefs = Utils.getContext().getSharedPreferences(PREFERENCES + name, MODE_PRIVATE);
+        mSharePrefs = RefWatcherUtils.getContext().getSharedPreferences(PREFERENCES + name, MODE_PRIVATE);
     }
 
     /**
@@ -48,7 +48,7 @@ public class SharedPreferenceUtils {
      * MODE_PUBLIC 公开模式-可以被其他人打开
      */
     public static void init(String name, int Mode) {
-        mSharePrefs = Utils.getContext().getSharedPreferences(PREFERENCES + name, Mode);
+        mSharePrefs = RefWatcherUtils.getContext().getSharedPreferences(PREFERENCES + name, Mode);
     }
 
     /**

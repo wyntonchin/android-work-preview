@@ -17,7 +17,6 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.hismart.easylink.preview.util.LogUtils;
 import com.hismart.easylink.preview.eventbus.Event;
-import com.hismart.easylink.preview.mamager.ActivityStack;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;

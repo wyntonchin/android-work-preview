@@ -1,13 +1,14 @@
 package com.hismart.easylink.preview;
 
-import android.app.Application;
-import android.content.Intent;
+import android.app.ActivityManager;
+import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.text.TextUtils;
 
 import com.facebook.stetho.Stetho;
-import com.facebook.stetho.inspector.database.SqliteDatabaseDriver;
+import com.hismart.easylink.preview.databases.DbManager;
 import com.hismart.easylink.preview.util.SharedPreferenceUtils;
-import com.hismart.easylink.preview.util.Utils;
+import com.hismart.easylink.preview.util.RefWatcherUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.litepal.LitePalApplication;
@@ -24,11 +25,17 @@ public class EasyLinkApplication extends LitePalApplication {
     @Override
     public void onCreate() {
         super.onCreate();
+        if (TextUtils.equals(getCurrentProcessName(this), getPackageName())) {
+            init();//判断成功后才执行初始化代码
+        }
+    }
+
+    private void init(){
 
         //初始化facebook调试神器
         Stetho.initializeWithDefaults(this);
         //Utils 初始化（方便全局获取ApplicationContext,RefWatcher）
-        Utils.init(this);
+        RefWatcherUtils.init(this);
 
         SharedPreferenceUtils.init("easylink3.2");
         if(SharedPreferenceUtils.get(SharedPreferenceUtils.INIT_FLAG,false)){
@@ -36,7 +43,7 @@ public class EasyLinkApplication extends LitePalApplication {
             SQLiteDatabase sqlite = Connector.getDatabase();
             //sqlite.insert()
         }
-        Connector.getDatabase();
+        DbManager.getInsatance();
 
         //ToastUtils 初始化（新Toast显示时若旧Toast还在显示，直接将旧Toast Cancel掉）
         //ToastUtils.init(true);
@@ -50,5 +57,19 @@ public class EasyLinkApplication extends LitePalApplication {
 
         //开启测试服务
         //startService(new Intent(this, MyService.class));
+    }
+
+
+    private String getCurrentProcessName(Context context) {
+        int pid = android.os.Process.myPid();
+        ActivityManager mActivityManager = (ActivityManager) context
+                .getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningAppProcessInfo appProcess : mActivityManager
+                .getRunningAppProcesses()) {
+            if (appProcess.pid == pid) {
+                return appProcess.processName;
+            }
+        }
+        return null;
     }
 }
