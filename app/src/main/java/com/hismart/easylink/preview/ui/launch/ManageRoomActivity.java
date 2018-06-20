@@ -10,19 +10,13 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
-import android.util.Log;
-import android.view.ContextMenu;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 
 import com.hismart.easylink.preview.R;
 import com.hismart.easylink.preview.ui.BaseToolbarCompatActivity;
-import com.hismart.easylink.preview.ui.launch.adapter.HomepageRoomAdapter;
 import com.hismart.easylink.preview.ui.launch.adapter.ManageRoomAdapter;
 import com.hismart.easylink.preview.ui.launch.adapter.RecyclerItemClickListener;
-import com.hismart.easylink.preview.ui.launch.entity.RoomEntity;
+import com.hismart.easylink.preview.databases.RoomEntity;
 
 import java.util.ArrayList;
 import java.util.Collections;

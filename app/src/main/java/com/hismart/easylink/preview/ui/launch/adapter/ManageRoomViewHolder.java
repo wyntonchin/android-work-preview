@@ -1,18 +1,10 @@
 package com.hismart.easylink.preview.ui.launch.adapter;
 
 import android.content.Context;
-import android.util.Log;
-import android.view.ContextMenu;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.hismart.easylink.preview.R;
-import com.hismart.easylink.preview.ui.launch.entity.RoomEntity;
+import com.hismart.easylink.preview.databases.RoomEntity;
 
 /**
  * @author qinwendong

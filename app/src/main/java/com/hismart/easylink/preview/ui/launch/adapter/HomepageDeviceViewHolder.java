@@ -7,7 +7,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.hismart.easylink.preview.R;
-import com.hismart.easylink.preview.ui.launch.entity.DeviceEntity;
+import com.hismart.easylink.preview.databases.DeviceEntity;
 
 /**
  * @author qinwendong

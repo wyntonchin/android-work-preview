@@ -5,8 +5,13 @@
     <version value="1" />
   
     <list>
-        <mapping class="com.hismart.easylink.preview.ui.launch.entity.HouseEntity"/>
-        <mapping class="com.hismart.easylink.preview.ui.launch.entity.RoomEntity"/>
-        <mapping class="com.hismart.easylink.preview.ui.launch.entity.DeviceEntity"/>
+        <mapping class="com.hismart.easylink.preview.databases.DeviceEntity"/>
+        <mapping class="com.hismart.easylink.preview.databases.HouseEntity"/>
+        <mapping class="com.hismart.easylink.preview.databases.HouseMember"/>
+        <mapping class="com.hismart.easylink.preview.databases.MessageEntity"/>
+        <mapping class="com.hismart.easylink.preview.databases.RoomEntity"/>
+        <mapping class="com.hismart.easylink.preview.databases.SuspendSceneInfo"/>
+        <mapping class="com.hismart.easylink.preview.databases.TaskInfo"/>
+        <mapping class="com.hismart.easylink.preview.databases.UserInfo"/>
     </list>  
 </litepal> 

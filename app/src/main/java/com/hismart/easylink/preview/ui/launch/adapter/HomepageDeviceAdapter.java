@@ -3,7 +3,7 @@ package com.hismart.easylink.preview.ui.launch.adapter;
 import android.content.Context;
 import android.view.ViewGroup;
 
-import com.hismart.easylink.preview.ui.launch.entity.DeviceEntity;
+import com.hismart.easylink.preview.databases.DeviceEntity;
 
 /**
  * @author qinwendong

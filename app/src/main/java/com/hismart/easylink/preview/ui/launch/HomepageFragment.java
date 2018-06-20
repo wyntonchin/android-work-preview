@@ -1,11 +1,8 @@
 package com.hismart.easylink.preview.ui.launch;
 
-import android.app.Activity;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -29,12 +26,11 @@ import android.widget.PopupWindow;
 import android.widget.Toast;
 
 import com.hismart.easylink.preview.R;
+import com.hismart.easylink.preview.databases.DeviceEntity;
 import com.hismart.easylink.preview.ui.StatusBarUtil;
 import com.hismart.easylink.preview.ui.launch.adapter.HomepageDeviceAdapter;
 import com.hismart.easylink.preview.ui.launch.adapter.HomepageRoomAdapter;
-import com.hismart.easylink.preview.ui.launch.dummy.DummyContent;
-import com.hismart.easylink.preview.ui.launch.entity.DeviceEntity;
-import com.hismart.easylink.preview.ui.launch.entity.RoomEntity;
+import com.hismart.easylink.preview.databases.RoomEntity;
 
 import android.support.v7.widget.ListPopupWindow;
 
