@@ -20,6 +20,10 @@ allprojects {
         google()
         jcenter()
     }
+
+    configurations {
+        all*.exclude group: 'com.android.support', module: 'support-v4'
+    }
 }
 
 task clean(type: Delete) {

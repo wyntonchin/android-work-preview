@@ -11,7 +11,7 @@ import android.view.View;
 /**
  * @author qinwendong
  * @date 2018/6/16
- * descrption:
+ * descrption: from zhanghongyang csdn
  */
 public abstract class RecyclerItemClickListener implements RecyclerView.OnItemTouchListener{
 
